@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+
+*{
+    color:black;
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Navigation bar */
+header{
+    padding: 0.009px 0px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.12);
+}
+.navbar{
+    background-color: white;
+    margin: 13px 13px;
+    
+}
+.navbar li a{
+    text-decoration: none;
+    color: black;
+    text-decoration: none;
+    list-style-type: none;
+    font-size: 17px;
+    transition: filter 0.3s ease;
+}
+.navbar li a:hover{
+    filter: brightness(200%);
+}
+.navbar li{
+    list-style-type: none;
+    padding: 0px 10px;
+    
+}
+
+.logo{
+    margin-right:auto;
+}
+
+.navbar ul{
+    display:flex;
+    align-items: center;
+}
+
+.navbar img{
+    max-width: 100px;
+    max-height: auto;
+    padding: 0px 0px;
+    margin: 0px 0px;
+    justify-content: left;
+}
+
+/*hero part*/
+.mainpart{
+    display:flex;
+    min-height: 50px;
+    height: 47vw;
+    background-color: rgb(240, 244, 248);
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(10px, 4vw, 35px);
+    padding: 10px clamp(12px, 6vw, 8%) 0px 8%;
+}
+
+
+.titlesec{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    width: 45%;
+    height: 45%;
+    min-height: 30px;
+    min-width: 30px;
+    
+}
+
+.titlesec h1{
+    padding:20px 0px;
+    font-size: clamp(0px,3vw,64px);
+    font-family: 'Cinzel', serif;
+    
+}
+.titlesec p{
+    font-size: clamp(0px, 2vw, 22px);
+}
+
+.titlesec button{
+    margin:10px 0px;
+    font-size: clamp(8px,1.5vw,30px);
+    padding: 5px 10px;
+    border: none;
+    border-radius: 7px;
+    color: white;
+    background-color:rgb(239, 88, 88);
+}
+
+
+.mainpart img{
+    width: 45%;
+    
+    max-height: 100%;
+    height: auto;
+    min-height: 50px;
+    min-width:300px;
+    object-fit: contain;
+    flex: 2;
+}
+
+
+/*Product lines*/
+.linesec{
+    margin: 5vw 1vw;
+}
+.lines{
+    margin: 3vw 1vw;
+    display: flex;
+
+}
+.linestitle{
+    text-align: center;
+    margin: 15px;
+}
+.linestitle h2{
+    font-size: clamp(20px,2.5vw,64px);
+}
+.linestitle p{
+    font-size: clamp(10px, 1.5vw, 22px);;
+}
+.lines figure{
+    flex: 1;
+    text-align: center;  
+}
+
+.lines figure button{
+    margin:10px 0px;
+    font-size: clamp(3px,1vw,30px);
+    padding: 5px 10px;
+    border: none;
+    border-radius: 0.5vw;
+    color: white;
+    background-color:rgb(239, 88, 88);
+}
+.lines figure h3{
+    font-size: clamp(10px,1.5vw,64px);
+}
+
+.lines img{
+    width: 98%;
+    height: auto;
+    
+}
+
+
+
+
+
+
+/* Save ts for later */
+.row{
+    padding:50px 0px;
+    
+}
+
+.row figure{
+    padding: 10px 15px;
+    border-radius: 20px;
+}
+.row figcaption{
+
+}
+.row img{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.row h2{
+    text-align: center;
+}
+
+.row figcaption{
+    padding: 0px 5px;
+}
+.offer{
+    padding: 10px 0px;
+    text-align: center;
+}
+.swords{
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+}
+
+
+.choices{
+    display: flex;
+    justify-content: center;
+}
+
+.choices figure{
+    max-width: 100%;
+    padding: 0px 47px;
+}
+
+.choices h3{
+    text-align: center;
+}
