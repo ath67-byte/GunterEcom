@@ -28,10 +28,10 @@ header{
     text-decoration: none;
     list-style-type: none;
     font-size: 17px;
-    transition: filter 0.3s ease;
+    transition: transform 0.2s ease;
 }
 .navbar li a:hover{
-    filter: brightness(200%);
+    transform: scale(150%);
 }
 .navbar li{
     list-style-type: none;
@@ -41,6 +41,13 @@ header{
 
 .logo{
     margin-right:auto;
+}
+.cart{
+    padding: 15px 0px 0px 0px;
+    width: 25px;
+    height: auto;
+    position: relative;
+    top: 3px;
 }
 
 .navbar ul{
@@ -83,8 +90,7 @@ header{
 
 .titlesec h1{
     padding:20px 0px;
-    font-size: clamp(0px,3vw,64px);
-    font-family: 'Cinzel', serif;
+    font-size: clamp(0px,2.7vw,64px);
     
 }
 .titlesec p{
@@ -128,19 +134,20 @@ header{
     margin: 15px;
 }
 .linestitle h2{
-    font-size: clamp(20px,2.5vw,64px);
+    font-size: clamp(15px,2.5vw,64px);
 }
 .linestitle p{
-    font-size: clamp(10px, 1.5vw, 22px);;
+    font-size: clamp(5px, 1.5vw, 22px);
 }
 .lines figure{
     flex: 1;
     text-align: center;  
 }
 
+
 .lines figure button{
     margin:10px 0px;
-    font-size: clamp(3px,1vw,30px);
+    font-size: clamp(5px,1.1vw,30px);
     padding: 5px 10px;
     border: none;
     border-radius: 0.5vw;
@@ -157,56 +164,48 @@ header{
     
 }
 
+/*Examples of people who use are products*/
+.examples h2{
+    text-align: center;
+    font-size: clamp(20px,2.5vw,64px);
+}
 
-
-
-
-
-/* Save ts for later */
-.row{
-    padding:50px 0px;
+.leftImgExample {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap: 10vw;
     
 }
-
-.row figure{
-    padding: 10px 15px;
-    border-radius: 20px;
-}
-.row figcaption{
-
-}
-.row img{
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
-.row h2{
-    text-align: center;
-}
-
-.row figcaption{
-    padding: 0px 5px;
-}
-.offer{
-    padding: 10px 0px;
-    text-align: center;
-}
-.swords{
+.rightImgExample{
     display: flex;
-    justify-content: center;
-    max-width: 100%;
+    justify-content:center;
+    align-items: center;
+    gap: 10vw; 
+}
+
+.examples h3{
+    font-size: clamp(10px,2.5vw,64px);
+}
+.examples figure span{
+    width: clamp(5px, 30vw, 60px);
+    width: clamp(5px, 30vw, 60px);
+    
+}
+.examples figure figcaption{
+    font-size: clamp(5px, 1.5vw, 22px);
+}
+
+.examples img{
+    width: 40%;
+    height: auto;
+    margin: 8vw 4vw;
 }
 
 
-.choices{
-    display: flex;
-    justify-content: center;
-}
 
-.choices figure{
-    max-width: 100%;
-    padding: 0px 47px;
-}
 
-.choices h3{
-    text-align: center;
-}
+
+
+
+
