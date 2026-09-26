@@ -153,7 +153,7 @@ header{
     text-align: center;  
 }
 
-
+/*Got rid of these buttons but may bring them back idk */
 .lines figure button{
     margin:10px 0px;
     font-size: clamp(5px,1.1vw,30px);
