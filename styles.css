@@ -1,11 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Cinzel:wght@600;700;800;900&display=swap');
 
 *{
     color:black;
     margin: 0px;
     padding: 0px;
     font-family: 'Montserrat', sans-serif;
+}
+h1, h2, h3 {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.03em;
+    font-weight: 900;
 }
 
 /* Navigation bar */
@@ -89,22 +94,26 @@ header{
 }
 
 .titlesec h1{
-    padding:20px 0px;
+    padding:1vw 0px;
     font-size: clamp(0px,2.7vw,64px);
     
 }
 .titlesec p{
-    font-size: clamp(0px, 2vw, 22px);
+    font-size: clamp(0px, 1vw, 22px);
 }
 
 .titlesec button{
     margin:10px 0px;
-    font-size: clamp(8px,1.5vw,30px);
-    padding: 5px 10px;
+    font-size: clamp(0px,1vw,30px);
+    padding: 0.2vw 0.7vw;
     border: none;
-    border-radius: 7px;
+    border-radius: 50px;
     color: white;
     background-color:rgb(239, 88, 88);
+    transition: filter 0.3s ease;
+}
+.titlesec button:hover{
+    filter: brightness(90%);
 }
 
 
@@ -153,55 +162,61 @@ header{
     border-radius: 0.5vw;
     color: white;
     background-color:rgb(239, 88, 88);
+    transition: filter 0.3s ease;
 }
+
 .lines figure h3{
     font-size: clamp(10px,1.5vw,64px);
+    margin: 10px;
 }
 
 .lines img{
     width: 98%;
     height: auto;
-    
+    transition: filter 0.3s ease;
+}
+.lines img:hover{
+    filter: brightness(60%);
 }
 
-/*Examples of people who use are products*/
+/*Examples of people who use our products*/
+.examples{
+    background-color: rgb(240, 244, 248);
+    padding: 5vw 0px;
+}
+.examplefigs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .examples h2{
+    font-size: clamp(15px,2.5vw,64px);
     text-align: center;
-    font-size: clamp(20px,2.5vw,64px);
 }
-
-.leftImgExample {
+.examplefigs figure{
     display: flex;
-    justify-content:center;
     align-items: center;
-    gap: 10vw;
-    
-}
-.rightImgExample{
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    gap: 10vw; 
-}
-
-.examples h3{
-    font-size: clamp(10px,2.5vw,64px);
-}
-.examples figure span{
-    width: clamp(5px, 30vw, 60px);
-    width: clamp(5px, 30vw, 60px);
-    
-}
-.examples figure figcaption{
-    font-size: clamp(5px, 1.5vw, 22px);
-}
-
-.examples img{
-    width: 40%;
+    margin: 5vw 0vw;
+    width: fit-content;
     height: auto;
-    margin: 8vw 4vw;
+    gap: 15vw;
+
+}
+.examplefigs img{
+    width: 35vw;
+    height: auto;
+}
+.explanation{
+    width: 20vw;
+    height: 15vw;
+}
+.examplefigs h3{
+    font-size: clamp(10px,1.5vw,64px);
 }
 
+.examplefigs figcaption{
+    font-size: clamp(0px, 1vw, 22px);
+}
 
 
 
