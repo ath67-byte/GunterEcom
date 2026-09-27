@@ -224,3 +224,21 @@ header{
 
 
 
+
+
+/*CART*/
+.cartTippyTop{
+    gap: 30vw;
+    padding: 3vw 10vw;
+}
+
+.cartTitle{
+    padding: 5vw 10vw;
+}
+
+
+
+
+
+
+
