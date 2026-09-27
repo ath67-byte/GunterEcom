@@ -227,13 +227,91 @@ header{
 
 
 /*CART*/
-.cartTippyTop{
-    gap: 30vw;
-    padding: 3vw 10vw;
+.cart-page{
+    background-color: rgb(240, 244, 248);
 }
 
 .cartTitle{
-    padding: 5vw 10vw;
+    margin: 5vw 10vw;
+}
+
+.cartTitle h1{
+    font-size: clamp(25px,2.7vw,64px);
+}
+.cartTitle p{
+    font-size: clamp(12px, 1vw, 22px);
+}
+
+.cartBody{
+ 
+
+}
+.summary{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.summary h2{
+    text-align: center;
+    padding: 2vw;
+    font-size: clamp(15px,1.7vw,64px);
+}
+
+.cartTotal{
+    display: flex;
+    gap: 70vw;
+    justify-content: center;
+    font-size: clamp(8px, 1vw, 22px);
+}
+
+.checkoutPart{
+    border-radius:50px;
+    background-color: white;
+    margin: 0.5vw 10vw 3vw 10vw;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.checkoutPart p{
+    margin: 1vw 0vw;
+    font-size: clamp(8px, 1vw, 22px);
+}
+
+.itemPlaceHolder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60vw;
+}
+.itemPlaceHolder span{
+    margin: 0vw 5vw 0vw 0vw;
+}
+.itemPlaceHolder img{
+    border-radius: 40px;
+    width: 10vw;
+    margin: 1vw 1vw 1vw 25px;
+}
+
+.orderButton{
+    padding: 0.3vw 10vw;
+    margin: 3vw;
+    border-radius: 50px;
+    background-color: rgb(255, 208, 0);
+    border: none;
+    transition: filter 0.2s ease;
+    font-size: clamp(5px,1.1vw,30px);
+}
+
+.orderButton:hover{
+    filter: brightness(75%);
+}
+
+
+
+.purchaseInfo{
+    background-color: white;
 }
 
 
