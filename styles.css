@@ -43,10 +43,20 @@ header{
     padding: 0px 10px;
     
 }
-
+.menu{
+    width: 30px;
+    height: auto;
+}
 .logo{
     margin-right:auto;
+
 }
+.login{
+    width: 60px;
+    height: auto;
+    margin: 30px 0px 0px 0px;
+}
+
 .cart{
     padding: 15px 0px 0px 0px;
     width: 25px;
