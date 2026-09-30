@@ -323,6 +323,25 @@ header{
 .purchaseInfo{
     background-color: white;
 }
+.items{
+    display: grid;
+    place-items: center;
+
+}
+.loginForm{
+    background-color: rgb(240, 244, 248);
+    border-radius: 20px;
+    padding: 1vw 20vw;
+    text-align: center;
+    margin: 5vw 5vw;
+}
+.signinForm{
+    background-color: rgb(240, 244, 248);
+    border-radius: 20px;
+    padding: 1vw 5vw;
+    text-align: center;
+    margin: 5vw 5vw;
+}
 
 
 
