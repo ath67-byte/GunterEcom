@@ -19,7 +19,9 @@
         <header>
             <nav class="navbar">
                 <ul>
-                    <li><a href=""><img class="menu" src="Navbar/three.png"></a></li>
+                    <label for="menu-toggle">
+                        <img class ="menu" src="Navbar/three.png">
+                    </label>
                     <li class="logo"><a href="home.html"><img src="Navbar/logo2.png"></a></li>
                     <li><a href="home.html">Home</a></li>
                     <li><a href="cart.html"><img class="cart" src="Navbar/cart.png"></a></li>
@@ -27,6 +29,15 @@
                 </ul>        
             </nav>
         </header>
+        <input type="checkbox" id="menu-toggle" hidden>
+        <nav class="sidenav">
+                <label for="menu-toggle" class="close-btn">✕</label>
+                <a href="home.html">Home</a>
+                <a href="cart.html">Cart</a>
+                <a href="login.html">Log In</a>
+                <a href="signup.html">Sign Up</a>
+        </nav>
+        <label for="menu-toggle" class="overlay"></label>
         <section class="mainpart">
             <span class="titlesec">
                 <h1>For Those Who Dare</h1>
