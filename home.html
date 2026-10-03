@@ -102,14 +102,75 @@
 
 
             </div>
-
         </section>
-        
+            <section id="app" class="appsec">
+    <div class="apphead">
+        <h2>Gunter's Forge</h2>
+        <span id="who"></span>
+    </div>
+    <nav class="tabbar">
+        <button data-screen="shop" class="active">Shop</button>
+        <button data-screen="orders">My Orders</button>
+        <button data-screen="forge">Forge</button>
+    </nav>
+
+    <div id="shop" class="screen active">
+        <p id="shop-message" class="message"></p>
+        <div id="product-list" class="grid"></div>
+        <form id="order-form" class="card hidden">
+            <h3 id="order-title"></h3>
+            <label>Your name
+                <input id="order-name" autocomplete="name" required>
+            </label>
+            <label>Quantity
+                <input id="order-qty" type="number" min="1" value="1" required>
+            </label>
+            <label id="option-wrap"><span id="option-name">Option</span>
+                <select id="order-option"></select>
+            </label>
+            <label>Notes
+                <textarea id="order-notes" rows="2"></textarea>
+            </label>
+            <div class="row">
+                <button type="submit">Place order</button>
+                <button type="button" id="order-cancel" class="secondary">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="orders" class="screen">
+        <div id="my-orders"></div>
+    </div>
+
+    <div id="forge" class="screen">
+        <form id="login-form" class="card hidden">
+            <label>Email
+                <input id="login-email" type="email" autocomplete="username" required>
+            </label>
+            <label>Password
+                <input id="login-password" type="password" autocomplete="current-password" required>
+            </label>
+            <button type="submit">Log in</button>
+            <p id="login-message" class="message"></p>
+        </form>
+        <div id="dashboard" class="hidden">
+            <div class="row spread">
+                <h3>To-do list</h3>
+                <button id="logout" class="secondary">Log out</button>
+            </div>
+            <p id="forge-message" class="message"></p>
+            <div id="queue"></div>
+            <h3>Materials</h3>
+            <div id="materials"></div>
+        </div>
+    </div>
+</section>
         
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         
-        <script src="" async defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <script src="backend.js"></script>
     </body>
 </html>
