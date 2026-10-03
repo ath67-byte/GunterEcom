@@ -16,7 +16,9 @@
         <header>
             <nav class="navbar">
                 <ul>
-                    <li><a href=""><img class="menu" src="Navbar/three.png"></a></li>
+                    <label for="menu-toggle">
+                        <img class ="menu" src="Navbar/three.png">
+                    </label>
                     <li class="logo"><a href="home.html"><img src="Navbar/logo2.png"></a></li>
                     <li><a href="home.html">Home</a></li>
                     <li><a href="cart.html"><img class="cart" src="Navbar/cart.png"></a></li>
@@ -24,4 +26,39 @@
                 </ul>        
             </nav>
         </header>
-        
+        <input type="checkbox" id="menu-toggle" hidden>
+        <nav class="sidenav">
+                <label for="menu-toggle" class="close-btn">✕</label>
+                <a href="home.html"><button class="sidenavbuttons">Home</button></a>
+                <a href="cart.html"><button class="sidenavbuttons">Cart</button></a>
+                <a href="login.html"><button class="sidenavbuttons">Log In</button></a>
+                <a href="signup.html"><button class="sidenavbuttons">Sign Up</button></a>
+                <a href="shopall.html"><button class="sidenavbuttons">Shop All</button></a>
+        </nav>
+        <label for="menu-toggle" class="overlay"></label>
+        <p class="breadcrumb">
+            Home / Shop All
+        </p>
+            <label for="filter-toggle" class="filterbtn">
+                <img class ="filter" src="Navbar/filter.png">
+                Show Filter
+            </label>
+
+        <input type="checkbox" id="filter-toggle" hidden>
+        <nav class="filternav">
+            <label for="filter-toggle" class="close-btn">✕</label>
+                <form>
+                    <input type="checkbox" id="itemtype1" name="itemtype1" value="Sword">
+                <label for="itemtype1"> Sword</label><br>
+                <input type="checkbox" id="itemtype2" name="itemtype2" value="Plate Armor">
+                <label for="itemtype2"> Plate Armor</label><br>
+                <input type="checkbox" id="itemtype3" name="itemtype3" value="Chain Mail">
+                <label for="itemtype3"> Chain Mail</label><br>
+                <input type="checkbox" id="itemtype4" name="itemtype4" value="Cooking Pot">
+                <label for="itemtype4"> Cooking Pot</label>
+                </form>
+        </nav>
+        <label for="filter-toggle" class="filteroverlay"></label>
+
+    </body>
+</html>

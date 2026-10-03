@@ -136,6 +136,8 @@ header{
 }
 
 
+
+
 /*hero part*/
 .mainpart{
     display:flex;
@@ -402,6 +404,61 @@ header{
 }
 
 
+/*Shop all tabs*/
+/*Little text at the top*/
+.breadcrumb{
+    padding: 20px 8%;
+    border-bottom: 1px solid lightgray;
+}
+/*Filter Nav (shop all)*/
+.filterbtn{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 20px 8%;
+    padding-top: 300px;
+    cursor: pointer;
+}
+.filter{
+    width: 30px;
+    height: auto;
+}
+.filternav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100vh;
+    padding: 70px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    background-color: white;
+    z-index: 999;
+    transform: translate(-100%);
+    transition: transform 0.3s ease;
+    font-size: clamp(10px, 2vw, 22px);
+    align-items: center;
+}
+.filteroverlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+#filter-toggle:checked + .filternav {
+    transform: translateX(0);
+}
+#filter-toggle:checked ~ .filteroverlay{
+    opacity: 1;
+    pointer-events: auto;
+}
 
 
 
