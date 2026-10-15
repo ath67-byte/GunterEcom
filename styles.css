@@ -405,6 +405,17 @@ header{
 
 
 /*Shop all tabs*/
+/*banner*/
+.banner{
+    display:flex;
+    min-height: 50px;
+    height: 47vw;
+    background-color: rgb(240, 244, 248);
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(10px, 4vw, 35px);
+    padding: 10px clamp(12px, 6vw, 8%) 0px 8%;
+}
 /*Little text at the top*/
 .breadcrumb{
     padding: 20px 8%;
@@ -438,7 +449,13 @@ header{
     transform: translate(-100%);
     transition: transform 0.3s ease;
     font-size: clamp(10px, 2vw, 22px);
-    align-items: center;
+    align-items: stretch;
+}
+.filternav details{
+    width: 100%;
+}
+.filternav summary{
+    cursor: pointer;
 }
 .filteroverlay{
     position: fixed;

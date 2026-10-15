@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Commerce Filter Bar</title>
+  <style>
+    /* 1. LAYOUT BASE STYLES */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      padding: 30px;
+      background-color: #fafafa;
+      color: #333;
+    }
+
+    /* 2. PRIMARY BUTTON STYLE */
+    .filter-toggle-btn {
+      background-color: #111;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 3. HORIZONTAL EXPANDING BAR */
+    .filter-bar {
+      display: none; 
+      gap: 15px;
+      align-items: center;
+      flex-wrap: wrap;
+      background-color: #f5f5f7;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 8px;
+      border: 1px solid #e5e5ea;
+    }
+
+    .filter-bar.open {
+      display: flex;
+    }
+
+    /* 4. NESTED DROPDOWN WRAPPERS */
+    .filter-group {
+      position: relative;
+    }
+
+    .nested-toggle-btn {
+      background-color: #fff;
+      border: 1px solid #d1d1d6;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nested-toggle-btn:hover {
+      background-color: #f0f0f5;
+    }
+
+    /* 5. POPUP CHECKBOX PANELS */
+    .nested-dropdown-content {
+      display: none;
+      position: absolute;
+      top: 42px;
+      left: 0;
+      background-color: #fff;
+      min-width: 190px;
+      border: 1px solid #d1d1d6;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 12px;
+      border-radius: 8px;
+      z-index: 10;
+    }
+
+    .filter-group.active .nested-dropdown-content {
+      display: block;
+    }
+
+    .nested-dropdown-content label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .nested-dropdown-content label:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 6. PRIMARY ACTION BUTTON */
+    .apply-btn {
+      background-color: #0071e3;
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .apply-btn:hover {
+      background-color: #0077ed;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Main Trigger Button -->
+  <button id="mainFilterBtn" class="filter-toggle-btn">
+    🔍 Select Filters <span>▼</span>
+  </button>
+
+  <!-- The Filter Bar Container -->
+  <div id="filterBar" class="filter-bar">
+    
+    <!-- Filter Category 1 -->
+    <div class="filter-group">
+      <button class="nested-toggle-btn">Category <span>▼</span></button>
+      <div class="nested-dropdown-content">
+        <label><input type="checkbox" name="category" value="clothing"> Clothing</label>
+        <label><input type="checkbox" name="category" value="electronics"> Electronics</label>
+        <label><input type="checkbox" name="category" value="home"> Home & Living</label>
+      </div>
+    </div>
+
+    <!-- Filter Category 2 -->
+    <div class="filter-group">
+      <button class="nested-toggle-btn">Price Range <span>▼</span></button>
+      <div class="nested-dropdown-content">
+        <label><input type="checkbox" name="price" value="under-25"> Under $25</label>
+        <label><input type="checkbox" name="price" value="25-100"> $25 to $100</label>
+        <label><input type="checkbox" name="price" value="over-100"> Over $100</label>
+      </div>
+    </div>
+
+    <!-- Filter Category 3 -->
+    <div class="filter-group">
+      <button class="nested-toggle-btn">Availability <span>▼</span></button>
+      <div class="nested-dropdown-content">
+        <label><input type="checkbox" name="stock" value="in-stock"> In Stock</label>
+        <label><input type="checkbox" name="stock" value="sale"> On Sale</label>
+      </div>
+    </div>
+
+    <!-- Apply Changes Action Button -->
+    <div class="filter-actions">
+      <button id="applyFiltersBtn" class="apply-btn">Apply Filters</button>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const mainFilterBtn = document.getElementById('mainFilterBtn');
+      const filterBar = document.getElementById('filterBar');
+      const nestedBtns = document.querySelectorAll('.nested-toggle-btn');
+
+      // Toggle top-level filter bar view
+      mainFilterBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        filterBar.classList.toggle('open');
+      });
+
+      // Handle independent column list expansions
+      nestedBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const currentGroup = btn.parentElement;
+
+          document.querySelectorAll('.filter-group').forEach(group => {
+            if (group !== currentGroup) {
+              group.classList.remove('active');
+            }
+          });
+
+          currentGroup.classList.toggle('active');
+        });
+      });
+
+      // Close open sub-menus if a user clicks background whitespace
+      document.addEventListener('click', (e) => {
+        if (!filterBar.contains(e.target) && e.target !== mainFilterBtn) {
+          document.querySelectorAll('.filter-group').forEach(group => {
+            group.classList.remove('active');
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
