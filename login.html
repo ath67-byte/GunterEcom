@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
+    <body class="loginBackground">
         <header>
             <nav class="navbar">
                 <ul>
@@ -37,25 +37,23 @@
         </nav>
         <label for="menu-toggle" class="overlay"></label>
         <section class="items">
-            <!--This is some shitty ass code right here. Do this in the css file-->
+            
             <div class="loginForm">
 
 
-            <h1>
-                Welcome Back
-            </h1>
-            <form>
-                <label for="username">Username:</label><br>
-                <input type="text" id="username" name="username"><br>
-                <label for="password">Password:</label><br>
-                <input type="text" id="password" name="password">
-            </form>
-            <button onclick="window.location.href='home.html';">Contiue</button>
-            <p>
-                Don't Have an Account?
-            </p>
-            <button onclick="window.location.href='signup.html';">Sign Up</button>
-            </div>
+                <h1>Welcome Back</h1>
+                <form>
+                    <div class="loginUser">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username">
+                    </div>
+                    <div class="loginPass">
+                        <label for="password">Password:</label>
+                        <input type="text" id="password" name="password">
+                    </div>
+                </form>
+                <button class="loginButton" onclick="window.location.href='home.html';">Login</button>
+            </div>    
             
 
         </section>
