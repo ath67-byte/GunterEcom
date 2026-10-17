@@ -44,21 +44,28 @@
             <h1>
                 Welcome Back
             </h1>
-            <form>
-                <label for="username">Username:</label><br>
-                <input type="text" id="username" name="username"><br>
+            <form id ="login-form">
+                <p id="login-message"></p>
+                <label for="email">Email:</label><br>
+                <input type="text" id="email" name="email"><br>
                 <label for="password">Password:</label><br>
-                <input type="text" id="password" name="password">
+                <input type="password" id="password" name="password">
+                <button type="submit">Continue</button>
             </form>
-            <button onclick="window.location.href='home.html';">Contiue</button>
+    <!--       <button onclick="window.location.href='home.html';">Contiue</button>  
             <p>
                 Don't Have an Account?
             </p>
             <button onclick="window.location.href='signup.html';">Sign Up</button>
+                    -->
             </div>
             
 
         </section>
-        <script src="" async defer></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4"></script>
+        <script src="supabase.js"></script>
+        <script src="login.js"></script>       
     </body>
+    
 </html>

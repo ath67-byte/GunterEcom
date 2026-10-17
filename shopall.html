@@ -119,6 +119,15 @@
             </details>
         </nav>
         <label for="filter-toggle" class="filteroverlay"></label>
-
+        <select name="sort-by" id="sort-by">
+            <option value="Trending">Trending</option>
+            <option value="AZ">A-Z</option>
+            <option value="ZA">Z-A</option>
+            <option value="price-low">Price, low to high</option>
+            <option value="price-high">Price, high to low</option>
+        </select>
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4"></script>
+        <script src="supabase.js"></script>   <!-- your shared file -->
+        <script src="shop.js"></script>       <!-- this page's file -->
     </body>
 </html>
