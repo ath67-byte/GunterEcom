@@ -48,6 +48,87 @@
                 <img src="Swords/New Medieval Images/Nuremberg Line/No Background/German Sallet 1490.png">
             </div>
         </section>
+         <label for="filter-toggle" class="filterbtn">
+                <img class ="filter" src="Navbar/filter.png">
+                Show Filter 14 Products
+            </label>
+
+        <input type="checkbox" id="filter-toggle" hidden>
+        <nav class="filternav">
+            <label for="filter-toggle" class="close-btn">✕</label>
+            <details id="type-of-item">
+                <summary>Type of Item</summary>
+
+                    <form>
+                        <input type="checkbox" id="itemtype1" name="itemtype1" value="Sword">
+                            <label for="itemtype1"> Sword</label><br>
+                        <input type="checkbox" id="itemtype2" name="itemtype2" value="Plate Armor">
+                            <label for="itemtype2"> Plate Armor</label><br>
+                        <input type="checkbox" id="itemtype3" name="itemtype3" value="Chain Mail">
+                            <label for="itemtype3"> Chain Mail</label><br>
+                        <input type="checkbox" id="itemtype4" name="itemtype4" value="Cooking Pot">
+                            <label for="itemtype4"> Cooking Pot</label>
+                    </form>
+            </details>
+            <details id="price-filter">
+                <summary>Price Range</summary>
+
+                    <form>
+                        <input type="checkbox" id="pricerange1" name="pricerange1" value="0-25">
+                            <label for="pricerange1"> 0-25</label><br>
+                        <input type="checkbox" id="pricerange2" name="pricerange2" value="25-100">
+                            <label for="itemtype2"> 25-100</label><br>
+                        <input type="checkbox" id="pricerange3" name="pricerange3" value="100-200">
+                            <label for="itemtype3"> 100-200</label><br>
+                        <input type="checkbox" id="pricerange4" name="pricerange4" value="200+">
+                            <label for="itemtype4"> 200+</label>
+                    </form>
+            </details>
+            <details id="material-filter">
+                <summary>Material</summary>
+
+                    <form>
+                        <input type="checkbox" id="materialtype1" name="materialtype1" value="Steel">
+                            <label for="materialtype1"> Steel</label><br>
+                        <input type="checkbox" id="materialtype2" name="mterialtype2" value="Gold">
+                            <label for="materialtype2"> Gold</label><br>
+                        <input type="checkbox" id="materialtype3" name="materialtype3" value="Leather">
+                            <label for="materialtype3"> Leather</label><br>
+                        <input type="checkbox" id="materialtype4" name="materialtype4" value="Iron">
+                            <label for="materialtype4"> Iron</label>
+                    </form>
+            </details>
+            <details id="line-filter">
+                <summary>Line</summary>
+
+                    <form>
+                        <input type="checkbox" id="linetype1" name="linetype1" value="nuremburg-line">
+                            <label for="linetype1"> Nuremburg Line</label><br>
+                        <input type="checkbox" id="linetype2" name="linetype2" value="passau-wolf-line">
+                            <label for="linetype2"> Passau Wolf Line</label><br>
+                        <input type="checkbox" id="linetype3" name="linetype3" value="milan-line">
+                            <label for="linetype3"> Milan Line</label><br>
+                    </form>
+            </details>
+            <details id="availabilty">
+                <summary>Availibilty</summary>
+
+                    <form>
+                        <input type="checkbox" id="in-stock" name="in-stock" value="in-stock">
+                            <label for="in-stock"> In Stock</label><br>
+                        <input type="checkbox" id="out-of-stock" name="out-of-stock" value="out-of-stock">
+                            <label for="out-of-stock"> Out of Stock</label><br>
+                    </form>
+            </details>
+        </nav>
+        <label for="filter-toggle" class="filteroverlay"></label>
+        <select name="sort-by" id="sort-by">
+            <option value="Trending">Trending</option>
+            <option value="AZ">A-Z</option>
+            <option value="ZA">Z-A</option>
+            <option value="price-low">Price, low to high</option>
+            <option value="price-high">Price, high to low</option>
+        </select>
 <section class="lineProducts" id="product-list"></section>
         </section>
         
