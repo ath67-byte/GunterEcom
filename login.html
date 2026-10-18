@@ -42,17 +42,18 @@
 
 
                 <h1>Welcome Back</h1>
-                <form>
+                <form id="login-form">
                     <div class="loginUser">
-                        <label for="username">Username:</label>
-                        <input type="text" id="username" name="username">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email">
                     </div>
                     <div class="loginPass">
                         <label for="password">Password:</label>
-                        <input type="text" id="password" name="password">
+                        <input type="password" id="password" name="password">
                     </div>
+                    <button class ="loginButton" type ="submit">Login</button>
                 </form>
-                <button class="loginButton" onclick="window.location.href='home.html';">Login</button>
+                <p id ="login-message"></p>
             </div>    
             
 
