@@ -319,6 +319,10 @@ header{
     place-items: center;
 }
 
+.lineProducts a{
+    text-decoration: none;
+}
+
 .lineProducts a figure{
     display: flex;
     flex-direction: column;
