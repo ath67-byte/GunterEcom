@@ -48,7 +48,7 @@
                 <img src="Swords/New Medieval Images/Nuremberg Line/No Background/German Sallet 1490.png">
             </div>
         </section>
-        <section class="lineProducts">
+<section class="lineProducts" id="product-list"></section>
             <a>
             <figure>
                 <img src="Swords/New Medieval Images/Nuremberg Line/With Background/Close Helmet Visored.png">
@@ -141,6 +141,9 @@
             </a>
         </section>
         
-        <script src="" async defer></script>
+            <script>const LINE = "Nuremberg";</script>   <!-- "Milan" / "Greenwich" on the other pages -->
+            <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4"></script>
+            <script src="supabase.js"></script>
+            <script src="shop.js"></script>
     </body>
 </html>
