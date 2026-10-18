@@ -511,7 +511,11 @@ header{
     filter: brightness(75%);
 }
 
-
+/*product page*/
+#product-image{
+    width: 70vw;
+    height:auto;
+}
 
 /*Shop all tabs*/
 /*banner*/
