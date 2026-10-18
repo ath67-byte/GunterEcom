@@ -15,3 +15,10 @@ async function isStaff(){
     const {data} = await sb.rpc('is_staff');
     return !!data;
 }
+function getCart() {
+  return JSON.parse(localStorage.getItem("cart")) || [];
+}
+
+function saveCart(cart) {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
