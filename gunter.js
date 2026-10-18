@@ -43,7 +43,7 @@ board.innerHTML = data.map((o) => {
       </div>
     <div class="order-stage-dropdown">
       <label>Stage</label>
-      <select id ="dropdown">
+      <select id ="${o.id}">
         <option value="queued" ${o.status === "queued" && "selected"}>Queued</option>
         <option value="forging" ${o.status === "forging" && "selected"}>Forging</option>
         <option value="ready" ${o.status === "ready" && "selected"}>Ready</option>
@@ -55,16 +55,17 @@ board.innerHTML = data.map((o) => {
 }
 
 document.getElementById("order-board").addEventListener("change", async (event) => {
-  const select = event.target.closest("select[dropdown]");
+  const select = event.target.closest("select[id]");
   if (!select) return;
 
   const { error } = await sb
     .from("orders")
     .update({ status: select.value })
-    .eq("id", select.dataset.id);
+    .eq("id", select.id);
   if (error) {
     console.error(error); 
-    return;}
+    return;
+  }
 
   loadOrders();
 });

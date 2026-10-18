@@ -23,7 +23,7 @@ async function loadLine() {
   }).join("");
 }
 
-// ---------- Product page (product.html?id=...) ----------
+
 function getProductId() {
   const params = new URLSearchParams(window.location.search);
   return params.get("id");
@@ -33,7 +33,6 @@ async function loadProduct() {
   const { data, error } = await sb
     .from("products")
     .select("*")
-    .eq("id", getProductId())
     .single();
   if (error) {
     document.getElementById("product-name").textContent = "Product not found";
@@ -51,14 +50,6 @@ async function loadProduct() {
   document.getElementById("product-description").textContent = data.description ?? "";
 }
 
-// ---------- Cart (saved in the browser) ----------
-function getCart() {
-  return JSON.parse(localStorage.getItem("cart")) || [];
-}
-
-function saveCart(cart) {
-  localStorage.setItem("cart", JSON.stringify(cart));
-}
 
 function addToCart() {
   const id = getProductId();
@@ -75,7 +66,6 @@ function addToCart() {
   document.getElementById("cart-message").textContent = "Added to cart!";
 }
 
-// ---------- Start: run only what this page needs ----------
 getUser();
 
 if (document.getElementById("product-list")) {
@@ -87,3 +77,8 @@ if (document.getElementById("product-name")) {
 if (document.getElementById("add-to-cart")) {
   document.getElementById("add-to-cart").addEventListener("click", addToCart);
 }
+
+const priceSort = document.getElementById("price-high");
+priceSort.addEventListener("click", async () => {
+
+});

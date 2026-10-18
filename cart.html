@@ -41,28 +41,40 @@
                 <h1>Cart</h1>
                 <p>Sign in or create an account to track Gunter's to do list</p>
             </div>
+            <section id ="empty-cart" class ="empty-cart" hidden>
+                <p>The cart is empty</p>
+                <a href="Nuremberg.html">Shop the Nuremberg Line</a>
+            </section>
         </section>
-        <section class="summary">
-            <div class="checkoutPart">
-                <div class = "itemPlaceHolder">
-                    <img src="Swords/Twohand.png">
-                    <span>
-                        <p>Two-Hand Sword<p>
-                        <p>$119.99</p>
-                        </span>
-                </div>
-            </div>
-            <div class = "checkoutPart">
-                <h2>Your Order</h2>
-                <div class="cartTotal">
-                    <p>Total</p>
-                    <p>$119.99</p>
-                 </div>
-                 <p>Orders may take a little time to prepare and ship. Thank you for your patience.<p>   
-                <button class="orderButton">PLACE ORDER</button>
+<section id="cart-full" class="summary">
+    <div class="checkoutPart" id="cart-items"></div>
+
+    <div class="checkoutPart">
+        <h2>Your Order</h2>
+        <div class="cartTotal">
+            <p id="item-count">Subtotal</p>
+            <p id="cart-total">$0</p>
+        </div>
+
+        <form id="checkout-form">
+            <label for="name">Name</label>
+            <input type="text" id="name" required>
+
+            <div id="account-fields">
+                <label for="email">Email</label>
+                <input type="email" id="email">
+                <label for="password">Password</label>
+                <input type="password" id="password" minlength="6">
             </div>
 
-        </section>   
-        <script src="" async defer></script>
+            <button type="submit" class="orderButton" id="place-order">PLACE ORDER</button>
+        </form>
+        <p id="checkout-message"></p>
+        <p>Orders may take a little time to forge. Thank you for your patience.</p>
+    </div>
+</section>
+            <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4"></script>
+            <script src="supabase.js"></script>
+            <script src="cart.js"></script>
     </body>
 </html>
