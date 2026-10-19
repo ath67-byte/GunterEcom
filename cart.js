@@ -48,11 +48,11 @@ function showCart() {
 
     return `
       <div class="cartItem">
-        <img src="${p.image_url}">
+        <img class="cartItemImage" src="${p.image_url}" alt="${p.name}">
         <div class="cartItemInfo">
-          <p><strong>${p.name}</strong></p>
-          <p>${p.line} Line</p>
-          <p>$${p.price.toLocaleString()}</p>
+          <p class="cartItemName"><strong>${p.name}</strong></p>
+          <p class="cartItemLine">${p.line} Line</p>
+          <p class="cartItemPrice">$${p.price.toLocaleString()}</p>
           <div class="qty">
             <button type="button" onclick="changeQuantity('${p.id}', -1)">−</button>
             <span>${item.quantity}</span>
