@@ -523,7 +523,7 @@ header{
 }
 
 #checkout-form input:focus{
-    outline: 2px solid #145b54;
+    outline: 2px solid rgb(239, 88, 88);;
     outline-offset: 1px;
 }
 
@@ -533,7 +533,7 @@ header{
     margin: 18px 0 0;
     padding: 12px 18px;
     border-radius: 26px;
-    background: #064f49;
+    background: rgb(239, 88, 88);
     color: #fff;
     font-size: 15px;
     font-weight: 700;
