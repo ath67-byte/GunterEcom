@@ -37,10 +37,28 @@
                 <a href="minigame.html"><button class="sidenavbuttons" id="minigameButton">Minigame</button></a>
         </nav>
         <label for="menu-toggle" class="overlay"></label>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        
-        <script src="" async defer></script>
+        <main class="minigame">
+            <h1>Gunter's Mine</h1>
+            <p class="minigame-intro">Your order is on the anvil. Grab as many diamonds as you can in 30 seconds.</p>
+
+            <div class="minigame-stats">
+                <span>Score: <strong id="score">0</strong></span>
+                <span>Time: <strong id="time">30</strong></span>
+                <span>Best: <strong id="best">0</strong></span>
+            </div>
+
+            <canvas id="game" width="480" height="360"></canvas>
+
+            <button id="startButton" class="minigame-start">Start</button>
+
+            <div class="dpad">
+                <button class="dpad-btn dpad-up" data-key="ArrowUp">▲</button>
+                <button class="dpad-btn dpad-left" data-key="ArrowLeft">◀</button>
+                <button class="dpad-btn dpad-right" data-key="ArrowRight">▶</button>
+                <button class="dpad-btn dpad-down" data-key="ArrowDown">▼</button>
+            </div>
+
+            <p class="minigame-help">Use the arrow keys, or the buttons on a phone.</p>
+        </main>
     </body>
 </html>
