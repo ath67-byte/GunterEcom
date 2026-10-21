@@ -7,10 +7,10 @@ function showEmptyCart() { //shows info for empty cart
 
 
 function findById(list, id) { //finds id of item
-  for (const thing of list) {
+  for (const item of list) {
     // ids can be numbers in the database but strings in the cart, so compare as text
-    if (String(thing.id) === String(id)) {
-      return thing;
+    if (String(item.id) === String(id)) {
+      return item;
     }
   }
   return null;
@@ -20,19 +20,19 @@ function findById(list, id) { //finds id of item
 async function loadCart() { //loads the cart
 
   const ids = [];
-  for (const item of getCart()) {
+  for (const item of getCart()) { // adds each id to the list
     ids.push(item.id);
   }
 
-  const {data, error} = await sb.from("products").select("*").in("id", ids);
-  if (error) {
+  const {data, error} = await sb.from("products").select("*").in("id", ids); // finds the product ids
+  if (error) { //error handling
     console.error(error);
     document.getElementById("cart-items").innerHTML =
       "<p>Could not load your cart. Please refresh the page.</p>";
     return;
   }
 
-  cartProducts = data;
+  cartProducts = data; //saves the reutrned products
   showCart();
 }
 
@@ -44,18 +44,18 @@ function showCart() { //draws the cart
   }
 
   document.getElementById("empty-cart").hidden = true;
-  document.getElementById("cart-full").hidden = false;
+  document.getElementById("cart-full").hidden = false; //shows the full cart, hides the empty card
 
   let html = "";
   let total = 0;
   let count = 0;
 
   for (const item of cart) {
-    const p = findById(cartProducts, item.id);
+    const p = findById(cartProducts, item.id); //calls findById  to find item info
 
     if (p !== null) {
-      const price = p.price ?? 0;
-      const lineTotal = price * item.quantity;
+      const price = p.price ?? 0; //sees if the product exists
+      const lineTotal = price * item.quantity; // calculates the price, total, and quantity
       total = total + lineTotal;
       count = count + item.quantity;
 
@@ -80,9 +80,9 @@ function showCart() { //draws the cart
     }
   }
 
-  document.getElementById("cart-items").innerHTML = html;
-  document.getElementById("item-count").textContent = "Subtotal (" + count + (count === 1 ? " item)" : " items)");
-  document.getElementById("cart-total").textContent = "$" + total.toLocaleString();
+  document.getElementById("cart-items").innerHTML = html; //puts the generated page on cart
+  document.getElementById("item-count").textContent = "Subtotal (" + count + (count === 1 ? " item)" : " items)"); //display the quantity
+  document.getElementById("cart-total").textContent = "$" + total.toLocaleString(); //displays the total
 }
 
 
@@ -93,13 +93,13 @@ function changeQuantity(id, amount) { //for the change quantity button
     return;
   }
 
-  item.quantity = item.quantity + amount;
+  item.quantity = item.quantity + amount; 
   if (item.quantity <= 0) {
     removeItem(id);
     return;
   }
 
-  saveCart(cart);
+  saveCart(cart); //saves the cart
   showCart();
 }
 
