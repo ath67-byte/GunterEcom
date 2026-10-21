@@ -89,3 +89,5 @@ Helped create our minigame background and miner
 Backend - I used ai for a majority of the backend, but with it I learned a lot about javascript and sql. Prior to this, I had little to no experience with these programming languages, so ai helped me figure out how to code in these languages. I have a deep understanding of every function that we created and can explain them thouroughly.
 
 I wrote all of the tables in supabase, but ai generated example details about each item.
+
+For the game, I made the variables and the basic key functions. Ai helped with the rest of the functions

@@ -16,14 +16,16 @@ const gem_types = {
     green: { points: 3, life: 3000, src: "Minigame/green-diamond.png" },
     red: { points: 5, life: 2000, src: "Minigame/red-diamond.png" }
 };
-const bat = { x: 0, y: 0, size: 30, speed: 2, dx: 0, dy: 0, el: null };
-const bat_penalty = 2;
 const wall_fraction = 10 / 160;
-const miner = { x: 0, y: 0, size: 34, speed: 3 };
+const base_width = 480;
+const miner_base_size = 34;
+const miner_base_speed = 3;
+const miner = { x: 0, y: 0, size: miner_base_size, speed: miner_base_speed };
 
 let mine_width = mine.clientWidth;
 let mine_height = mine.clientHeight;
 let wall = mine_width * wall_fraction;
+let gem_size = diamond_size;
 let diamonds = [];
 let score = 0;
 let best = Number(localStorage.getItem("minerBest")) || 0;
@@ -101,8 +103,6 @@ function movement() {
             }
         }
 
-        moveBat();
-
         updateTimer();
     }
     requestAnimationFrame(movement);
@@ -117,9 +117,9 @@ function makeDiamond() {
     let d;
     do {
         d = {
-            x: wall + Math.random() * (mine_width - 2 * wall - diamond_size),
-            y: wall + Math.random() * (mine_height - 2 * wall - diamond_size),
-            size: diamond_size,
+            x: wall + Math.random() * (mine_width - 2 * wall - gem_size),
+            y: wall + Math.random() * (mine_height - 2 * wall - gem_size),
+            size: gem_size,
             kind: pickKind()
         };
     } while (border(miner, d));
@@ -130,8 +130,7 @@ function makeDiamond() {
     d.el = document.createElement("img");
     d.el.src = gem_types[d.kind].src;
     d.el.className = "diamond";
-    d.el.style.left = d.x + "px";
-    d.el.style.top = d.y + "px";
+    drawDiamond(d);
     mine.appendChild(d.el);
     return d;
 }
@@ -143,57 +142,48 @@ function pickKind() {
     return "blue";
 }
 
-function placeBat() {
-    do {
-        bat.x = wall + Math.random() * (mine_width - 2 * wall - bat.size);
-        bat.y = wall + Math.random() * (mine_height - 2 * wall - bat.size);
-    } while (Math.hypot(bat.x - miner.x, bat.y - miner.y) < mine_width / 3);
-
-    const angle = Math.random() * Math.PI * 2;
-    bat.dx = Math.cos(angle) * bat.speed;
-    bat.dy = Math.sin(angle) * bat.speed;
-    drawBat();
-}
-
-function moveBat() {
-    bat.x += bat.dx;
-    bat.y += bat.dy;
-
-    if (bat.x < wall || bat.x > mine_width - wall - bat.size) {
-        bat.dx = -bat.dx;
-        bat.x = Math.max(wall, Math.min(bat.x, mine_width - wall - bat.size));
-    }
-    if (bat.y < wall || bat.y > mine_height - wall - bat.size) {
-        bat.dy = -bat.dy;
-        bat.y = Math.max(wall, Math.min(bat.y, mine_height - wall - bat.size));
-    }
-
-    if (border(miner, bat)) {
-        score = Math.max(0, score - bat_penalty);
-        scoreText.textContent = score;
-        minerImg.classList.add("hurt");
-        setTimeout(() => minerImg.classList.remove("hurt"), 300);
-        placeBat();
-    }
-
-    drawBat();
-}
-
-function drawBat() {
-    bat.el.style.left = bat.x + "px";
-    bat.el.style.top = bat.y + "px";
-    bat.el.style.transform = bat.dx < 0 ? "scaleX(-1)" : "scaleX(1)";
-}
-
 function border(a, b) {
     return a.x < b.x + b.size && a.x + a.size > b.x &&
            a.y < b.y + b.size && a.y + a.size > b.y;
 }
 
-function startGame() {
-    mine_width = mine.clientWidth;
+function updateSize() {
+    const new_width = mine.clientWidth;
+    const ratio = mine_width > 0 ? new_width / mine_width : 1;
+    const scale = new_width / base_width;
+
+    mine_width = new_width;
     mine_height = mine.clientHeight;
     wall = mine_width * wall_fraction;
+
+    miner.size = miner_base_size * scale;
+    miner.speed = miner_base_speed * scale;
+    miner.x *= ratio;
+    miner.y *= ratio;
+    minerImg.style.width = miner.size + "px";
+    minerImg.style.height = miner.size + "px";
+    drawMiner();
+
+    gem_size = diamond_size * scale;
+    diamonds.forEach((d) => {
+        d.x *= ratio;
+        d.y *= ratio;
+        d.size = gem_size;
+        drawDiamond(d);
+    });
+}
+
+function drawDiamond(d) {
+    d.el.style.left = d.x + "px";
+    d.el.style.top = d.y + "px";
+    d.el.style.width = d.size + "px";
+    d.el.style.height = d.size + "px";
+}
+
+window.addEventListener("resize", updateSize);
+
+function startGame() {
+    updateSize();
 
     score = 0;
     scoreText.textContent = 0;
@@ -207,15 +197,6 @@ function startGame() {
     diamonds.forEach((d) => d.el.remove());
     diamonds = [];
     for (let i = 0; i < diamond_count; i++) diamonds.push(makeDiamond());
-
-    if (!bat.el) {
-        bat.el = document.createElement("img");
-        bat.el.src = "Minigame/bat.png";
-        bat.el.className = "bat";
-        mine.appendChild(bat.el);
-    }
-    bat.el.classList.remove("hidden");
-    placeBat();
 
     startTime = Date.now();
     timeText.textContent = game_length;
@@ -235,7 +216,6 @@ function updateTimer() {
 }
 
 function endGame() {
-    bat.el.classList.add("hidden");
     Object.keys(keyPressed).forEach((k) => keyPressed[k] = false);
     running = false;
     if (score > best) {
@@ -247,4 +227,5 @@ function endGame() {
     setTimeout(() => alert("Time's up! You found " + score + (score === 1 ? " diamond" : " diamonds")), 50);
 }
 
+updateSize();
 movement();
