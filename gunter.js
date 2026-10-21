@@ -28,10 +28,22 @@ async function loadOrders(){
   const board = document.getElementById("order-board");
 board.innerHTML = data.map((o) => {
 
-  const productName = o.products.name;
+  // The product may have been deleted since the order was placed
+  let productName = "Removed product";
+  if (o.products) {
+    productName = esc(o.products.name);
+  }
   const name = esc(o.customer_name);
   const date = new Date(o.created_at).toLocaleString();
   const notes = esc(o.notes);
+
+  // Only the order's current stage gets "selected"
+  let queued = "";
+  let forging = "";
+  let ready = "";
+  if (o.status === "queued") queued = "selected";
+  if (o.status === "forging") forging = "selected";
+  if (o.status === "ready") ready = "selected";
 
   return `
     <div class="order-card">
@@ -44,9 +56,9 @@ board.innerHTML = data.map((o) => {
     <div class="order-stage-dropdown">
       <label>Stage</label>
       <select id ="${o.id}">
-        <option value="queued" ${o.status === "queued" && "selected"}>Queued</option>
-        <option value="forging" ${o.status === "forging" && "selected"}>Forging</option>
-        <option value="ready" ${o.status === "ready" && "selected"}>Ready</option>
+        <option value="queued" ${queued}>Queued</option>
+        <option value="forging" ${forging}>Forging</option>
+        <option value="ready" ${ready}>Ready</option>
       </select>
     </div>
   </div>

@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
+    <body class="loginBackground">
         <header>
             <nav class="navbar">
                 <ul>
@@ -32,22 +32,18 @@
                 <a href="home.html"><button class="sidenavbuttons">Home</button></a>
                 <a href="cart.html"><button class="sidenavbuttons">Cart</button></a>
                 <a href="login.html"><button class="sidenavbuttons">Log In</button></a>
-                <a href="signup.html"><button class="sidenavbuttons">Sign Up</button></a>
-                <a href="shopall.html"><button class="sidenavbuttons">Shop All</button></a>
+                <a href="orders.html"><button class="sidenavbuttons">My Orders</button></a>
         </nav>
         <label for="menu-toggle" class="overlay"></label>
-        <p class="breadcrumb">
-            Home / Shop All
-        </p>
-        <section class="banner">
-            <span class="titlesec">
-                <p>New collections of the highest quality.</p>
-            </span>
-            <img src="Hero/helmet-banner.png">
+        <section class="cartTitle">
+            <h1>My Orders</h1>
+            <p>See what stage Gunter is at with each of your orders</p>
         </section>
-           
+        <section class="summary" id="my-orders"></section>
+
         <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4"></script>
-        <script src="supabase.js"></script>   <!-- your shared file -->
-        <script src="shop.js"></script>       <!-- this page's file -->
+        <script src="supabase.js"></script>
+        <script src="orders.js"></script>       
     </body>
+    
 </html>

@@ -1,5 +1,5 @@
-// ---------- Line pages: load, filter, sort, show ----------
-let allProducts = [];   // every product in this line, loaded once
+
+let allProducts = [];   
 
 async function loadLine() {
   const { data, error } = await sb
@@ -15,7 +15,6 @@ async function loadLine() {
   updateProducts();
 }
 
-// Runs every time a filter or the sort changes
 function updateProducts() {
   const filtered = filterProducts(allProducts);
   const sorted = sortProducts(filtered);
@@ -43,8 +42,7 @@ function showProducts(list) {
   }).join("");
 }
 
-// ---------- Filter ----------
-// groupId is the id of a <details> in the filter panel, e.g. "material-filter"
+
 function getChecked(groupId) {
   const boxes = document.querySelectorAll(`#${groupId} input:checked`);
   const values = [];
