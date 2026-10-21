@@ -1,32 +1,32 @@
 
 let allProducts = [];   
 
-async function loadLine() {
-  const { data, error } = await sb
+async function loadLine() { // loads all the product line
+  const {data, error} = await sb
     .from("products")
     .select("*")
-    .eq("line", LINE);
+    .eq("line", LINE); //only keeps lines in LINE
   if (error) {
     console.error(error);
     return;
   }
 
-  allProducts = data;
+  allProducts = data; //saves the product in a list
   updateProducts();
 }
 
-function updateProducts() {
+function updateProducts() { // updates the products based on what was checked
   const filtered = filterProducts(allProducts);
   const sorted = sortProducts(filtered);
   showProducts(sorted);
 }
 
-function showProducts(list) {
+function showProducts(list) { // draws what each product looks like on the page
   const box = document.getElementById("product-list");
 
   if (list.length === 0) {
     box.innerHTML = "<p>No products match these filters.</p>";
-    return;
+    return; // if there are no products that are in the list
   }
 
   box.innerHTML = list.map((p) => {
@@ -43,7 +43,7 @@ function showProducts(list) {
 }
 
 
-function getChecked(groupId) {
+function getChecked(groupId) { // reads the boxes that are checkeed
   const boxes = document.querySelectorAll(`#${groupId} input:checked`);
   const values = [];
   boxes.forEach((box) => {
@@ -52,7 +52,7 @@ function getChecked(groupId) {
   return values;
 }
 
-function filterProducts(list) {
+function filterProducts(list) { // keep only ones that match the filter checked
   const types = getChecked("type-of-item");
   const materials = getChecked("material-filter");
   const prices = getChecked("price-filter");
@@ -67,7 +67,7 @@ function filterProducts(list) {
     }
     if (prices.length > 0) {
       const inRange = prices.some((range) => {
-        // "1000+" means 1000 and up
+
         if (range.endsWith("+")) {
           return p.price >= Number(range.replace("+", ""));
         }
@@ -93,10 +93,10 @@ function filterProducts(list) {
   });
 }
 
-// ---------- Sort ----------
-function sortProducts(list) {
+
+function sortProducts(list) { // sorts the products
   const sortBy = document.getElementById("sort-by").value;
-  const sorted = [...list];   // copy, so allProducts keeps its original order
+  const sorted = [...list]; 
 
   if (sortBy === "AZ") {
     sorted.sort((a, b) => a.name.localeCompare(b.name));
@@ -110,18 +110,18 @@ function sortProducts(list) {
   if (sortBy === "price-high") {
     sorted.sort((a, b) => b.price - a.price);
   }
-  // "Trending" = leave the original order
+
 
   return sorted;
 }
 
-// ---------- Product page (product.html?id=...) ----------
-function getProductId() {
+
+function getProductId() { //finds the product id
   const params = new URLSearchParams(window.location.search);
   return params.get("id");
 }
 
-async function loadProduct() {
+async function loadProduct() { // loads the individual product page
   const { data, error } = await sb
     .from("products")
     .select("*")
@@ -132,18 +132,13 @@ async function loadProduct() {
     return;
   }
 
-  let price = "Price coming soon";
-  if (data.price !== null) {
-    price = "$" + data.price;
-  }
-
   document.getElementById("product-image").src = data.image_url;
   document.getElementById("product-name").textContent = data.name;
   document.getElementById("product-price").textContent = price;
   document.getElementById("product-description").textContent = data.description ?? "";
 }
 
-function addToCart() {
+function addToCart() { // adds the items to the cart
   const id = getProductId();
   const cart = getCart();
 
@@ -158,21 +153,21 @@ function addToCart() {
   document.getElementById("cart-message").textContent = "Added to cart!";
 }
 
-// ---------- Start: run only what this page needs ----------
-getUser();
 
-if (document.getElementById("product-list")) {
+getUser(); // makes sure the user is signed in and if not assigns a id so orders can be tied back to them
+
+if (document.getElementById("product-list")) { // loads the lines
   loadLine();
 }
-if (document.querySelector(".filternav")) {
+if (document.querySelector(".filternav")) { // listens for change in filter and updates the list
   document.querySelector(".filternav").addEventListener("change", updateProducts);
 }
-if (document.getElementById("sort-by")) {
+if (document.getElementById("sort-by")) { // listens for change in sort and updates the list
   document.getElementById("sort-by").addEventListener("change", updateProducts);
 }
-if (document.getElementById("product-name")) {
+if (document.getElementById("product-name")) { // loads the product
   loadProduct();
 }
-if (document.getElementById("add-to-cart")) {
+if (document.getElementById("add-to-cart")) { // listens for add to cart
   document.getElementById("add-to-cart").addEventListener("click", addToCart);
 }

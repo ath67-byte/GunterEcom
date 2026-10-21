@@ -19,7 +19,7 @@ async function loadOrders(){ //the main load order function so gunter can see al
     const {data, error} = await sb
         .from("orders")
         .select("*, products(name)")
-        .in("status", ["queued", "forging"])
+        .in("status", ["queued", "forging"]) // if a order is ready, then it wont load
         .order("created_at"); //filters through the supabase orders and sorts by oldest orders
     if (error) {
       console.error(error); 
@@ -39,9 +39,9 @@ board.innerHTML = data.map((o) => { //turns the list of orders into html where o
   let ready = "";
   if (o.status === "queued") queued = "selected";
   if (o.status === "forging") forging = "selected";
-  if (o.status === "ready") ready = "selected";
+  if (o.status === "ready") ready = "selected"; //identifies which option is selected
 
-  return `
+  return ` 
     <div class="order-card">
       <div class="order-info">
         <h3>#${o.id}: ${productName} × ${o.quantity}</h3>
@@ -58,15 +58,15 @@ board.innerHTML = data.map((o) => { //turns the list of orders into html where o
       </select>
     </div>
   </div>
-`;
+`; //returns the html
 }).join("");
 }
 
-document.getElementById("order-board").addEventListener("change", async (event) => {
-  const select = event.target.closest("select[id]");
+document.getElementById("order-board").addEventListener("change", async (event) => { //listens for a event change
+  const select = event.target.closest("select[id]"); //finds what actually changed
   if (!select) return;
 
-  const { error } = await sb
+  const {error} = await sb
     .from("orders")
     .update({ status: select.value })
     .eq("id", select.id);
@@ -78,12 +78,12 @@ document.getElementById("order-board").addEventListener("change", async (event) 
   loadOrders();
 });
 
-const logoutBtn = document.getElementById("logout");
+const logoutBtn = document.getElementById("logout"); //logs out when Gunter presses logout and sends him back to the login page
 logoutBtn.addEventListener("click", async () => {
     await sb.auth.signOut();
     window.location.href = "login.html";
 });
-sb.channel("orders-feed")
+sb.channel("orders-feed") // opens a live connection with supabase so orders can be seen live without reloading
   .on("postgres_changes", { event: "*", schema: "public", table: "orders" }, loadOrders)
   .subscribe();
 onlyGunter();
