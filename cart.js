@@ -60,25 +60,24 @@ function showCart() {
       total = total + lineTotal;
       count = count + item.quantity;
 
-      html += `
-        <div class="cartItem">
-          <img src="${p.image_url}">
-          <div class="cartItemInfo">
-            <p><strong>${p.name}</strong></p>
-            <p>${p.line} Line</p>
-            <p>$${p.price.toLocaleString()}</p>
-            <div class="qty">
-              <button type="button" onclick="changeQuantity('${p.id}', -1)">−</button>
-              <span>${item.quantity}</span>
-              <button type="button" onclick="changeQuantity('${p.id}', 1)">+</button>
-            </div>
-            <button type="button" class="removeBtn" onclick="removeItem('${p.id}')">Remove</button>
+    return `
+      <div class="cartItem">
+        <img src="${p.image_url}">
+        <div class="cartItemInfo">
+          <p><strong>${p.name}</strong></p>
+          <p>${p.line} Line</p>
+          <p>$${p.price.toLocaleString()}</p>
+          <div class="qty">
+            <button type="button" onclick="changeQuantity('${p.id}', -1)">−</button>
+            <span>${item.quantity}</span>
+            <button type="button" onclick="changeQuantity('${p.id}', 1)">+</button>
           </div>
-          <p class="lineTotal">$${lineTotal.toLocaleString()}</p>
+          <button type="button" class="removeBtn" onclick="removeItem('${p.id}')">Remove</button>
         </div>
-      `;
-    }
-  }
+        <p class="lineTotal">$${lineTotal.toLocaleString()}</p>
+      </div>
+    `;
+  });
 
   document.getElementById("cart-items").innerHTML = html;
   document.getElementById("item-count").textContent = "Subtotal (" + count + " items)";
