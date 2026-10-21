@@ -837,3 +837,7 @@ header{
     linear-gradient(135deg, #d6f6ff, #6fd8ff 60%, #2fa8d8); 
     transform: rotate(45deg); 
     box-shadow: 0 0 8px rgba(120, 220, 255, 0.8); }
+.ruby::before{
+    background: linear-gradient(135deg, #ffd6dc, #e0115f 60%, #9b0d3a);
+    box-shadow: 0 0 10px rgba(255, 60, 100, 0.9);
+}
