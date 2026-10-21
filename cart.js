@@ -9,7 +9,8 @@ function showEmptyCart() {
 // Returns the thing in the list with this id, or null if there isn't one
 function findById(list, id) {
   for (const thing of list) {
-    if (thing.id === id) {
+    // ids can be numbers in the database but strings in the cart, so compare as text
+    if (String(thing.id) === String(id)) {
       return thing;
     }
   }
@@ -33,6 +34,8 @@ async function loadCart() {
   const { data, error } = await sb.from("products").select("*").in("id", ids);
   if (error) {
     console.error(error);
+    document.getElementById("cart-items").innerHTML =
+      "<p>Could not load your cart. Please refresh the page.</p>";
     return;
   }
 
@@ -47,6 +50,9 @@ function showCart() {
     return;
   }
 
+  document.getElementById("empty-cart").hidden = true;
+  document.getElementById("cart-full").hidden = false;
+
   let html = "";
   let total = 0;
   let count = 0;
@@ -56,32 +62,34 @@ function showCart() {
 
     // Skip products that no longer exist
     if (p !== null) {
-      const lineTotal = p.price * item.quantity;
+      const price = p.price ?? 0;
+      const lineTotal = price * item.quantity;
       total = total + lineTotal;
       count = count + item.quantity;
 
       html += `
         <div class="cartItem">
-          <img src="${p.image_url}">
-          <div class="cartItemInfo">
+          <img src="${p.image_url}" alt="${p.name}">
+          <div>
             <p><strong>${p.name}</strong></p>
-            <p>${p.line} Line</p>
-            <p>$${p.price.toLocaleString()}</p>
+            <p>${p.line} Line · $${price.toLocaleString()}</p>
             <div class="qty">
               <button type="button" onclick="changeQuantity('${p.id}', -1)">−</button>
               <span>${item.quantity}</span>
               <button type="button" onclick="changeQuantity('${p.id}', 1)">+</button>
             </div>
+          </div>
+          <div class="itemRight">
+            <p>$${lineTotal.toLocaleString()}</p>
             <button type="button" class="removeBtn" onclick="removeItem('${p.id}')">Remove</button>
           </div>
-          <p class="lineTotal">$${lineTotal.toLocaleString()}</p>
         </div>
       `;
     }
   }
 
   document.getElementById("cart-items").innerHTML = html;
-  document.getElementById("item-count").textContent = "Subtotal (" + count + " items)";
+  document.getElementById("item-count").textContent = "Subtotal (" + count + (count === 1 ? " item)" : " items)");
   document.getElementById("cart-total").textContent = "$" + total.toLocaleString();
 }
 

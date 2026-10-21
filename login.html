@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
+        <title>Log In | Gunter</title>
+        <meta name="description" content="Log in to your Gunter account to place orders and track their progress.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
+        <link rel="icon" type="image/png" href="favicon.png">
     </head>
     <body class="loginBackground">
         <header>
@@ -26,6 +23,7 @@
                 </ul>        
             </nav>
         </header>
+        <!-- hidden checkbox, the hamburger label ticks it and the css slides the side menu in -->
         <input type="checkbox" id="menu-toggle" hidden>
         <nav class="sidenav">
                 <label for="menu-toggle" class="close-btn">✕</label>
@@ -42,6 +40,7 @@
 
 
                 <h1>Welcome Back</h1>
+                <!-- login.js handles the submit -->
                 <form id="login-form">
                     <div class="loginUser">
                         <label for="email">Email:</label>

@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
+        <title>Your Cart | Gunter</title>
+        <meta name="description" content="Review the items in your cart and place your order with Gunter.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
+        <link rel="icon" type="image/png" href="favicon.png">
     </head>
     <body class="cart-page">
         <header>
@@ -26,6 +23,7 @@
                 </ul>        
             </nav>
         </header>
+        <!-- hidden checkbox, the hamburger label ticks it and the css slides the side menu in -->
         <input type="checkbox" id="menu-toggle" hidden>
         <nav class="sidenav">
                 <label for="menu-toggle" class="close-btn">✕</label>
@@ -40,11 +38,14 @@
                 <h1>YOUR CART</h1>
                 <a href="orders.html"><p>After you order, check its stage on the My Orders page</p></a>
             </div>
-            <section id ="empty-cart" class ="empty-cart" hidden>
-                <p>The cart is empty</p>
-                <a href="Nuremberg.html">Shop the Nuremberg Line</a>
-            </section>
         </section>
+        <!-- only shows when the cart has nothing in it, cart.js flips the hidden on this and cart-full -->
+        <section id="empty-cart" class="empty-cart" hidden>
+            <h2>Your cart is empty</h2>
+            <p>The forge is hot and waiting. Browse our lines to find something worth carrying.</p>
+            <a href="home.html#linesec" class="orderButton">Shop the Lines</a>
+        </section>
+<!-- items on the left, order summary + checkout on the right -->
 <section id="cart-full" class="summary">
     <div class="checkoutPart" id="cart-items"></div>
 

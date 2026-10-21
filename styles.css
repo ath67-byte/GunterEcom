@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Cinzel:wght@600;700;800;900&display=swap');
-
+/*General rules for all pages and headers*/
 *{
     color:black;
     margin: 0px;
@@ -12,10 +12,17 @@ h1, h2, h3 {
     letter-spacing: 0.03em;
     font-weight: 900;
 }
-/*smooth scrolling for in page links*/
+
+
+
+
+/*smooth scrolling for in-page links*/
 html{
     scroll-behavior: smooth;
 }
+
+
+
 
 /* Navigation bar */
 header{
@@ -29,8 +36,6 @@ header{
 .navbar{
     background-color: white;
     height: 60px;
-    
-    
 }
 .navbar li a{
     text-decoration: none;
@@ -62,7 +67,6 @@ header{
     height: auto;
     margin: 30px 0px 0px 0px;
 }
-
 .cart{
     padding: 15px 0px 0px 0px;
     width: 25px;
@@ -70,12 +74,10 @@ header{
     position: relative;
     top: 3px;
 }
-
 .navbar ul{
     display:flex;
     align-items: center;
 }
-
 .navbar img{
     max-width: 100px;
     max-height: auto;
@@ -83,7 +85,12 @@ header{
     margin: 0px 0px;
     justify-content: left;
 }
-/*Side Nav Attempt*/
+
+
+
+
+
+/*Side Nav*/
 .sidenav{
     position: fixed;
     top: 0;
@@ -112,8 +119,6 @@ header{
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
-
-
 }
 #menu-toggle:checked + .sidenav {
     transform: translateX(0);
@@ -133,6 +138,7 @@ header{
     transition: filter 0.1s ease;
     white-space: nowrap;
     width: 100%;
+    font-size: 12px;
     
 
 }
@@ -143,6 +149,8 @@ header{
 
 
 
+
+/*Home Page*/
 /*hero part*/
 .mainpart{
     display:flex;
@@ -154,8 +162,6 @@ header{
     gap: clamp(10px, 4vw, 35px);
     padding: 10px clamp(12px, 6vw, 8%) 0px 8%;
 }
-
-
 .titlesec{
     justify-content: center;
     align-items: center;
@@ -167,7 +173,6 @@ header{
     min-width: 30px;
     
 }
-
 .titlesec h1{
     padding:1vw 0px;
     font-size: clamp(0px,2.5vw,64px);
@@ -176,7 +181,6 @@ header{
 .titlesec p{
     font-size: clamp(0px, 1vw, 22px);
 }
-
 .titlesec button{
     margin:10px 0px;
     font-size: clamp(0px,1vw,30px);
@@ -190,8 +194,6 @@ header{
 .titlesec button:hover{
     filter: brightness(90%);
 }
-
-
 .mainpart img{
     width: 45%;
     
@@ -202,8 +204,6 @@ header{
     object-fit: contain;
     flex: 2;
 }
-
-
 /*Product lines*/
 .linesec{
     margin: 5vw 1vw;
@@ -227,24 +227,10 @@ header{
     flex: 1;
     text-align: center;  
 }
-
-/*Got rid of these buttons but may bring them back idk */
-.lines figure button{
-    margin:10px 0px;
-    font-size: clamp(5px,1.1vw,30px);
-    padding: 5px 10px;
-    border: none;
-    border-radius: 0.5vw;
-    color: white;
-    background-color:rgb(239, 88, 88);
-    transition: filter 0.3s ease;
-}
-
 .lines figure h3{
     font-size: clamp(10px,1.5vw,64px);
     margin: 10px;
 }
-
 .lines img{
     width: 98%;
     height: auto;
@@ -253,7 +239,6 @@ header{
 .lines img:hover{
     filter: brightness(60%);
 }
-
 /*Examples of people who use our products*/
 .examples{
     background-color: rgb(240, 244, 248);
@@ -293,7 +278,13 @@ header{
     font-size: clamp(0px, 1vw, 22px);
 }
 
+
+
+
+
+
 /*Nuremberg Line Page*/
+/*Hero part*/
 .topLine{
     display: flex;
     justify-content: center;
@@ -303,7 +294,6 @@ header{
     width:99vw;
     background-color: rgb(240, 244, 248);
 }
-
 .topLineImg img{
     width: 25vw;
     height: auto;
@@ -315,18 +305,16 @@ header{
 .topLineText p{
     font-size: clamp(11px,2vw,64px);
 }
-
+/*Products below*/
 .lineProducts{
     margin: 2vw 0px 10vw 0vw;
     display: grid;
     grid-template-columns:repeat(5, 1fr);
     place-items: center;
 }
-
 .lineProducts a{
     text-decoration: none;
 }
-
 .lineProducts a figure{
     display: flex;
     flex-direction: column;
@@ -349,13 +337,12 @@ header{
     margin: auto;
     font-size: 1.5vw;
 }
-
+/*Edge case Hero Images*/
 .greenwichImg img{
     width: 17vw;
     height: auto;
     margin: 3vw;
 }
-
 .nurembergImg img{
     width: 37vw;
     height: auto;
@@ -372,318 +359,171 @@ header{
 .cart-page{
     background-color: rgb(240, 244, 248);
 }
-
-.cartTitle{
-    margin: 5vw 10vw;
+/* without this, display: grid on #cart-full would beat the hidden attribute */
+[hidden]{
+    display: none !important;
 }
-
+.cartTitle{
+    margin: 5vw 10vw 3vw;
+}
 .cartTitle h1{
     font-size: clamp(25px,2.7vw,64px);
 }
 .cartTitle p{
     font-size: clamp(12px, 1vw, 22px);
 }
-
-.cartBody{
- 
-
-}
-.summary{
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.summary h2{
-    text-align: center;
-    padding: 2vw;
-    font-size: clamp(15px,1.7vw,64px);
-}
-
-.cartTotal{
-    display: flex;
-    gap: 70vw;
-    justify-content: center;
-    font-size: clamp(8px, 1vw, 22px);
-}
-
+/* white box used for the empty cart, the items and the order summary */
+.empty-cart,
 .checkoutPart{
-    border-radius:50px;
     background-color: white;
-    margin: 0.5vw 10vw 3vw 10vw;
-    align-items: center;
-    justify-content: center;
+    border: 1px solid #e4e1dc;
+    border-radius: 22px;
+    padding: 30px;
+}
+/*Empty cart*/
+.empty-cart{
+    width: min(600px, 80vw);
+    margin: 0 auto 8vw;
     text-align: center;
 }
-
-.checkoutPart p{
-    margin: 1vw 0vw;
-    font-size: clamp(8px, 1vw, 22px);
+.empty-cart h2{
+    font-size: clamp(20px, 2.2vw, 32px);
+    margin-bottom: 12px;
 }
-
-.itemPlaceHolder{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 60vw;
+.empty-cart p{
+    font-size: clamp(14px, 1.1vw, 18px);
+    color: #666;
 }
-.itemPlaceHolder span{
-    margin: 0vw 5vw 0vw 0vw;
+.empty-cart a{
+    display: inline-block;
+    margin-top: 24px;
+    color: white;
+    text-decoration: none;
 }
-.itemPlaceHolder img{
-    border-radius: 40px;
-    width: 10vw;
-    margin: 1vw 1vw 1vw 25px;
-}
-
-.orderButton{
-    padding: 0.3vw 10vw;
-    margin: 3vw;
-    border-radius: 50px;
-    background-color: rgb(255, 208, 0);
-    border: none;
-    transition: filter 0.2s ease;
-    font-size: clamp(5px,1.1vw,30px);
-}
-
-.orderButton:hover{
-    filter: brightness(75%);
-}
-
-/* Cart and checkout panel layout */
-#cart-full.summary{
+/*Cart with items: items on the left, order summary on the right*/
+#cart-full{
     width: min(1200px, 90vw);
     margin: 0 auto 48px;
     display: grid;
-    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.9fr);
+    grid-template-columns: 2fr 1fr;
     align-items: start;
     gap: 22px;
-    text-align: left;
 }
-
-#cart-full > .checkoutPart{
-    box-sizing: border-box;
-    width: 100%;
-    min-width: 0;
-    margin: 0;
-    padding: clamp(20px, 2.4vw, 34px);
-    border: 1px solid #e4e1dc;
-    border-radius: 22px;
-}
-
-#checkout-panel h2{
-    padding: 0 0 22px;
-    text-align: left;
-    font-size: clamp(21px, 2vw, 30px);
-}
-
-#checkout-panel .cartTotal{
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 16px;
-    padding: 0 0 18px;
-    border-bottom: 1px solid #e8e6e2;
-    font-size: 16px;
-}
-
-#checkout-panel .cartTotal p,
-#checkout-panel > p{
-    margin: 0;
-    font-size: 14px;
-}
-
-#checkout-panel #cart-total{
-    font-size: 20px;
-    font-weight: 700;
-}
-
-#checkout-form,
-#account-fields{
-    display: grid;
-    gap: 9px;
-}
-
-#checkout-form{ margin-top: 20px; }
-#account-fields{ margin-top: 8px; }
-#account-fields[hidden]{ display: none; }
-
-#checkout-form label{
-    margin-top: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    text-align: left;
-}
-
-#checkout-form input{
-    box-sizing: border-box;
-    width: 100%;
-    min-height: 44px;
-    padding: 10px 12px;
-    border: 1px solid #d9d7d2;
-    border-radius: 10px;
-    background: #fff;
-    font: inherit;
-}
-
-#checkout-form input:focus{
-    outline: 2px solid rgb(239, 88, 88);;
-    outline-offset: 1px;
-}
-
-#checkout-panel .orderButton{
-    width: 100%;
-    min-height: 50px;
-    margin: 18px 0 0;
-    padding: 12px 18px;
-    border-radius: 26px;
-    background: rgb(239, 88, 88);
-    color: #fff;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-#checkout-panel > p:last-child{
-    margin-top: 18px;
-    color: #666;
-    line-height: 1.5;
-}
-
-@media (max-width: 760px){
-    #cart-full.summary{
-        width: 90vw;
-        grid-template-columns: minmax(0, 1fr);
-        gap: 16px;
-    }
-}
-
 .cartItem{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 55vw;
-}
-.cartItem img{
-    height: auto;
-    width: 10vw;
-    border-radius: 40px;
-    margin: 1vw 1vw 1vw 0px;
-}
-
-/* Cart item list only; checkout styles remain separate. */
-#cart-items.checkoutPart{
-    box-sizing: border-box;
-    padding: clamp(14px, 2vw, 28px);
-    border: 1px solid #e4e1dc;
-    border-radius: 22px;
-    text-align: left;
-}
-
-#cart-items .cartItem{
     display: grid;
-    grid-template-columns: clamp(82px, 20vw, 132px) minmax(0, 1fr) auto;
+    grid-template-columns: 100px 1fr auto;
     align-items: center;
-    gap: clamp(14px, 1.5vw, 22px);
-    padding: 0 0 clamp(16px, 2vw, 24px);
-    margin: 0 0 clamp(16px, 2vw, 24px);
+    gap: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
     border-bottom: 1px solid #e8e6e2;
 }
-
-#cart-items .cartItem:last-child{
+.cartItem:last-child{
     padding-bottom: 0;
     margin-bottom: 0;
-    border-bottom: 0;
+    border-bottom: none;
 }
-
-#cart-items .cartItemImage{
-    display: block;
+.cartItem img{
     width: 100%;
-    aspect-ratio: 1;
-    height: auto;
-    object-fit: cover;
-    margin: 0;
     border-radius: 10px;
-    background: #f1f0ee;
 }
-
-#cart-items .cartItemInfo{
-    min-width: 0;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas:
-        "name remove"
-        "line qty"
-        "price qty";
-    align-items: center;
-    column-gap: 12px;
+.cartItem p{
+    margin: 4px 0;
+    font-size: 15px;
 }
-
-#cart-items .cartItemInfo p{
-    margin: 3px 0;
-    font-size: clamp(13px, 1vw, 16px);
+.itemRight{
+    text-align: right;
 }
-
-#cart-items .lineTotal{
-    align-self: start;
-    margin: 2px 0;
-    font-weight: 700;
-    white-space: nowrap;
-}
-
-#cart-items .cartItemName{ grid-area: name; font-size: clamp(15px, 1.2vw, 19px) !important; }
-#cart-items .cartItemLine{ grid-area: line; color: #777; }
-#cart-items .cartItemPrice{ grid-area: price; font-weight: 700; }
-
-#cart-items .qty{
-    grid-area: qty;
+.qty{
     display: inline-flex;
-    align-items: center;
-    justify-self: end;
     gap: 12px;
-    padding: 7px 12px;
+    margin-top: 8px;
+    padding: 4px 12px;
     border: 1px solid #e8e6e2;
-    border-radius: 24px;
-    white-space: nowrap;
+    border-radius: 20px;
 }
-
-#cart-items .qty button,
-#cart-items .removeBtn{
-    border: 0;
-    background: transparent;
+.qty button,
+.removeBtn{
+    border: none;
+    background: none;
+    font-size: 16px;
     cursor: pointer;
-    font: inherit;
 }
-
-#cart-items .qty button{ font-size: 20px; line-height: 1; }
-#cart-items .removeBtn{ grid-area: remove; justify-self: end; color: #777; font-size: 13px; }
-#cart-items .removeBtn:hover{ color: #111; text-decoration: underline; }
-
-@media (max-width: 600px){
-    #cart-items.checkoutPart{ margin-left: 5vw; margin-right: 5vw; padding: 14px; }
-    #cart-items .cartItem{ grid-template-columns: 76px minmax(0, 1fr); gap: 12px; }
-    #cart-items .lineTotal{ display: none; }
-    #cart-items .cartItemInfo{ column-gap: 6px; }
-    #cart-items .qty{ gap: 8px; padding: 6px 8px; }
+.removeBtn{
+    color: #777;
+    font-size: 13px;
 }
-
-
-
+/*Order summary*/
+#checkout-panel h2{
+    font-size: 22px;
+    margin-bottom: 16px;
+}
+.cartTotal{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e8e6e2;
+}
+#checkout-form{
+    display: grid;
+    gap: 8px;
+    margin-top: 16px;
+}
+#checkout-form input,
+#checkout-form textarea{
+    padding: 10px;
+    border: 1px solid #d9d7d2;
+    border-radius: 10px;
+    font-size: 15px;
+    resize: none;
+}
+#checkout-message{
+    margin-top: 12px;
+    color: rgb(239, 88, 88);
+}
+/*Red button, same as the login button*/
+.orderButton{
+    padding: 12px 28px;
+    border: none;
+    border-radius: 0.5vw;
+    background-color: rgb(239, 88, 88);
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+}
+.orderButton:hover{
+    filter: brightness(75%);
+}
+/*Phones: stack the summary under the items*/
+@media (max-width: 760px){
+    #cart-full{
+        grid-template-columns: 1fr;
+    }
+    .cartItem{
+        grid-template-columns: 70px 1fr;
+    }
+    .itemRight{
+        grid-column: 1 / -1;
+        text-align: left;
+    }
+}
 .purchaseInfo{
     background-color: white;
 }
 
-/*Login stuff*/
+
+
+
+
+/*Login Page*/
 .loginBackground{
     background-color: rgb(240, 244, 248);
-
 }
 .items{
-
     width: 100vw;
     display: grid;
     place-items: center;
-
 }
 
 .loginForm{
@@ -761,8 +601,9 @@ header{
     filter: brightness(75%);
 }
 
-/*product page*/
 
+
+/*product page*/
 #product-image{
     margin: 0vw auto 0px auto;
     padding: 2vw;
@@ -818,24 +659,13 @@ header{
     }
 }
 
-/*Shop all tabs*/
-/*banner*/
-.banner{
-    display:flex;
-    min-height: 50px;
-    height: 47vw;
-    background-color: rgb(240, 244, 248);
-    align-items: center;
-    justify-content: space-between;
-    gap: clamp(10px, 4vw, 35px);
-    padding: 10px clamp(12px, 6vw, 8%) 0px 8%;
-}
-/*Little text at the top*/
-.breadcrumb{
-    padding: 20px 8%;
-    border-bottom: 1px solid lightgray;
-}
-/*Filter Nav (shop all)*/
+
+
+
+
+
+
+/*Filter Nav*/
 .filterbtn{
     display: inline-flex;
     align-items: center;
