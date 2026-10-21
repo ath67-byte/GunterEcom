@@ -60,24 +60,25 @@ function showCart() {
       total = total + lineTotal;
       count = count + item.quantity;
 
-    return `
-      <div class="cartItem">
-        <img src="${p.image_url}">
-        <div class="cartItemInfo">
-          <p><strong>${p.name}</strong></p>
-          <p>${p.line} Line</p>
-          <p>$${p.price.toLocaleString()}</p>
-          <div class="qty">
-            <button type="button" onclick="changeQuantity('${p.id}', -1)">−</button>
-            <span>${item.quantity}</span>
-            <button type="button" onclick="changeQuantity('${p.id}', 1)">+</button>
+      html += `
+        <div class="cartItem">
+          <img src="${p.image_url}">
+          <div class="cartItemInfo">
+            <p><strong>${p.name}</strong></p>
+            <p>${p.line} Line</p>
+            <p>$${p.price.toLocaleString()}</p>
+            <div class="qty">
+              <button type="button" onclick="changeQuantity('${p.id}', -1)">−</button>
+              <span>${item.quantity}</span>
+              <button type="button" onclick="changeQuantity('${p.id}', 1)">+</button>
+            </div>
+            <button type="button" class="removeBtn" onclick="removeItem('${p.id}')">Remove</button>
           </div>
-          <button type="button" class="removeBtn" onclick="removeItem('${p.id}')">Remove</button>
+          <p class="lineTotal">$${lineTotal.toLocaleString()}</p>
         </div>
-        <p class="lineTotal">$${lineTotal.toLocaleString()}</p>
-      </div>
-    `;
-  });
+      `;
+    }
+  }
 
   document.getElementById("cart-items").innerHTML = html;
   document.getElementById("item-count").textContent = "Subtotal (" + count + " items)";
@@ -114,14 +115,6 @@ function removeItem(id) {
   showCart();
 }
 
-// ---------- Logged-in customers don't need email/password again ----------
-async function setUpCheckoutForm() {
-  const user = await getUser();
-  if (!user.is_anonymous) {
-    document.getElementById("account-fields").hidden = true;
-  }
-}
-
 // ---------- Place the order ----------
 // Shows a message and turns the button back on so the customer can try again
 function showCheckoutError(text) {
@@ -136,32 +129,14 @@ async function placeOrder(event) {
 
   const button = document.getElementById("place-order");
   const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-  const user = await getUser();
-
-  if (user.is_anonymous && (!email || !password)) {
-    showCheckoutError("Please enter an email and a password (at least 6 characters).");
-    return;
-  }
 
   button.disabled = true;
   button.textContent = "Placing order...";
 
-  // 1. Anonymous visitors: turn their anonymous id into a real account
-  if (user.is_anonymous) {
-    const { error } = await sb.auth.updateUser({
-      email: email,
-      password: password,
-      data: { name: name }
-    });
-    if (error) {
-      showCheckoutError(error.message);
-      return;
-    }
-  }
+  // Make sure the visitor has a (guest) id, so the order is saved as theirs
+  await getUser();
 
-  // 2. One order row per cart item
+  // 1. One order row per cart item
   const rows = [];
   for (const item of getCart()) {
     rows.push({
@@ -177,7 +152,7 @@ async function placeOrder(event) {
     return;
   }
 
-  // 3. Done: empty the cart
+  // 2. Done: empty the cart
   saveCart([]);
   showEmptyCart();
   document.querySelector("#empty-cart p").textContent =
@@ -191,5 +166,4 @@ async function placeOrder(event) {
 
 // ---------- Start ----------
 document.getElementById("checkout-form").addEventListener("submit", placeOrder);
-setUpCheckoutForm();
 loadCart();
