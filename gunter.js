@@ -1,43 +1,39 @@
-async function onlyGunter(){
+async function onlyGunter(){ //if the current uid does not match gunter's then they are logged out
     if(!(await isStaff())){
         window.location.href = "home.html";
     }
 }
-const STAGES = [
+const STAGES = [ //declares three stages that a order can be in
   { value: "queued",    label: "Queued" },
   { value: "forging",   label: "Forging" },
   { value: "ready",     label: "Ready" },
 ];
 
-function esc(text){
+function filter(text){ //filters out text so if a user uses special characters there is no errors
   const div = document.createElement("div");
   div.textContent = text ?? "";
   return div.innerHTML
 }
 
-async function loadOrders(){
+async function loadOrders(){ //the main load order function so gunter can see all the orders
     const {data, error} = await sb
         .from("orders")
         .select("*, products(name)")
         .in("status", ["queued", "forging"])
-        .order("created_at");
+        .order("created_at"); //filters through the supabase orders and sorts by oldest orders
     if (error) {
       console.error(error); 
       return; }
 
-  const board = document.getElementById("order-board");
-board.innerHTML = data.map((o) => {
+  const board = document.getElementById("order-board"); //puts the order cards into order board on gunter.html
+board.innerHTML = data.map((o) => { //turns the list of orders into html where o is the order
 
-  // The product may have been deleted since the order was placed
-  let productName = "Removed product";
-  if (o.products) {
-    productName = esc(o.products.name);
-  }
-  const name = esc(o.customer_name);
-  const date = new Date(o.created_at).toLocaleString();
-  const notes = esc(o.notes);
+  const productName = filter(o.products.name);
+  const name = filter(o.customer_name);
+  const date = new Date(o.created_at).toLocaleString(); //pulls the data from supabase
+  const notes = filter(o.notes);
 
-  // Only the order's current stage gets "selected"
+
   let queued = "";
   let forging = "";
   let ready = "";

@@ -129,6 +129,7 @@ async function placeOrder(event) {
 
   const button = document.getElementById("place-order");
   const name = document.getElementById("name").value.trim();
+  const notes = document.getElementById("notes").value.trim();
 
   button.disabled = true;
   button.textContent = "Placing order...";
@@ -142,7 +143,8 @@ async function placeOrder(event) {
     rows.push({
       customer_name: name,
       product_id: item.id,
-      quantity: item.quantity
+      quantity: item.quantity,
+      notes: notes
     });
   }
 
