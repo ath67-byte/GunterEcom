@@ -132,6 +132,11 @@ async function loadProduct() { // loads the individual product page
     return;
   }
 
+  let price = "Price coming soon"; // shown when the product has no price yet
+  if (data.price !== null) {
+    price = "$" + data.price;
+  }
+
   document.getElementById("product-image").src = data.image_url;
   document.getElementById("product-name").textContent = data.name;
   document.getElementById("product-price").textContent = price;
