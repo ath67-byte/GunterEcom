@@ -17,3 +17,26 @@ let timeLeft = game_length;
 let startTime = 0;
 let running = false;
 let finished = false;
+
+const keyPressed = {
+    ArrowUp: false,
+    ArrowDown: false,
+    ArrowLeft: false,
+    ArrowRight: false
+}
+window.addEventListener("keydown", (event) => {
+    if (event.key in keysPressed){
+        keyPressed[event.key] = false;
+    }
+});
+function movement(){
+  if (keysPressed.ArrowUp) y -= speed;
+  if (keysPressed.ArrowDown) y += speed;
+  if (keysPressed.ArrowLeft) x -= speed;
+  if (keysPressed.ArrowRight) x += speed;
+
+  miner.style.top = `${y}px`
+  miner.style.left = `${x}px`
+  requestAnimationFrame(movement);
+}
+movement;
