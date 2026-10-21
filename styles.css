@@ -824,8 +824,8 @@ header{
 }
 #minerImg{ 
     position: absolute; 
-    width: 34px; height: 
-    34px; 
+    width: 7vw; 
+    height: 7vw; 
     z-index: 2; 
 }
 .minigame{ 
@@ -836,8 +836,8 @@ header{
 }
 .diamond{ 
     position: absolute; 
-    width: 22px; 
-    height: 22px; 
+    width: 5vw; 
+    height: 5vw; 
 }
 .diamond::before{ 
     content: ""; 
