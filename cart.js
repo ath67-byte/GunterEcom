@@ -1,13 +1,12 @@
-let cartProducts = [];   // product details (name, price, image) for the items in the cart
+let cartProducts = [];
 
-// ---------- Helpers ----------
-function showEmptyCart() {
+function showEmptyCart() { //shows info for empty cart
   document.getElementById("empty-cart").hidden = false;
   document.getElementById("cart-full").hidden = true;
 }
 
-// Returns the thing in the list with this id, or null if there isn't one
-function findById(list, id) {
+
+function findById(list, id) { //finds id of item
   for (const thing of list) {
     if (thing.id === id) {
       return thing;
@@ -16,21 +15,15 @@ function findById(list, id) {
   return null;
 }
 
-// ---------- Show the cart ----------
-async function loadCart() {
-  const cart = getCart();
-  if (cart.length === 0) {
-    showEmptyCart();
-    return;
-  }
 
-  // The cart only stores ids and quantities, so get names, prices and images from Supabase
+async function loadCart() { //loads the cart
+
   const ids = [];
-  for (const item of cart) {
+  for (const item of getCart()) {
     ids.push(item.id);
   }
 
-  const { data, error } = await sb.from("products").select("*").in("id", ids);
+  const {data, error} = await sb.from("products").select("*").in("id", ids);
   if (error) {
     console.error(error);
     return;
@@ -40,10 +33,10 @@ async function loadCart() {
   showCart();
 }
 
-function showCart() {
+function showCart() { //draws the cart
   const cart = getCart();
   if (cart.length === 0) {
-    showEmptyCart();
+    showEmptyCart(); //if cart is empty then goes back to showEmptyCart
     return;
   }
 
@@ -54,7 +47,6 @@ function showCart() {
   for (const item of cart) {
     const p = findById(cartProducts, item.id);
 
-    // Skip products that no longer exist
     if (p !== null) {
       const lineTotal = p.price * item.quantity;
       total = total + lineTotal;
@@ -76,7 +68,7 @@ function showCart() {
           </div>
           <p class="lineTotal">$${lineTotal.toLocaleString()}</p>
         </div>
-      `;
+      `; //draws html
     }
   }
 
@@ -85,9 +77,8 @@ function showCart() {
   document.getElementById("cart-total").textContent = "$" + total.toLocaleString();
 }
 
-// ---------- Change the cart ----------
-// amount is 1 for the + button and -1 for the − button
-function changeQuantity(id, amount) {
+
+function changeQuantity(id, amount) { //for the change quantity button
   const cart = getCart();
   const item = findById(cart, id);
   if (item === null) {
@@ -104,7 +95,7 @@ function changeQuantity(id, amount) {
   showCart();
 }
 
-function removeItem(id) {
+function removeItem(id) { // for the remove item
   const newCart = [];
   for (const item of getCart()) {
     if (item.id !== id) {
@@ -115,16 +106,7 @@ function removeItem(id) {
   showCart();
 }
 
-// ---------- Place the order ----------
-// Shows a message and turns the button back on so the customer can try again
-function showCheckoutError(text) {
-  const button = document.getElementById("place-order");
-  button.disabled = false;
-  button.textContent = "PLACE ORDER";
-  document.getElementById("checkout-message").textContent = text;
-}
-
-async function placeOrder(event) {
+async function placeOrder(event) { // place order button
   event.preventDefault();   // stop the form from reloading the page
 
   const button = document.getElementById("place-order");
@@ -134,10 +116,8 @@ async function placeOrder(event) {
   button.disabled = true;
   button.textContent = "Placing order...";
 
-  // Make sure the visitor has a (guest) id, so the order is saved as theirs
   await getUser();
 
-  // 1. One order row per cart item
   const rows = [];
   for (const item of getCart()) {
     rows.push({
@@ -150,22 +130,20 @@ async function placeOrder(event) {
 
   const { error } = await sb.from("orders").insert(rows);
   if (error) {
-    showCheckoutError("Could not place order: " + error.message);
+
+    button.disabled = false;
+    button.textContent = "PLACE ORDER";
+    document.getElementById("checkout-message").textContent = "Could not place order: " + error.message;
     return;
   }
 
-  // 2. Done: empty the cart
+
   saveCart([]);
   showEmptyCart();
   document.querySelector("#empty-cart p").textContent =
     "Order placed! Gunter has been notified and will start forging soon.";
-
-  // Point the link under the message to the customer's orders
-  const link = document.querySelector("#empty-cart a");
-  link.href = "orders.html";
-  link.textContent = "Check your order status";
 }
 
-// ---------- Start ----------
+// when the form is filled out, runs place order
 document.getElementById("checkout-form").addEventListener("submit", placeOrder);
-loadCart();
+loadCart(); // loads the cart when the page is opened
