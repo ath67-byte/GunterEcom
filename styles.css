@@ -677,7 +677,14 @@ header{
     border-radius: 8px;
     background-color: white;
     font-size: clamp(12px, 1vw, 18px);
+    cursor: pointer;
+    transition: filter 0.3s ease;
+    
 }
+.filterbtn:hover{ 
+    filter: brightness(75%);
+}
+
 .filter{
     width: 22px;
     height: auto;
@@ -735,8 +742,3 @@ header{
     font-size: clamp(12px, 1vw, 18px);
     cursor: pointer;
 }
-
-
-
-
-
