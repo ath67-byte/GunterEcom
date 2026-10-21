@@ -3,14 +3,14 @@ const minerImg = document.getElementById("minerImg");
 const scoreText = document.getElementById("score");
 const timeText = document.getElementById("time");
 const bestScore = document.getElementById("best");
-const startButton = document.getElementById("startButton");
+const startButton = document.getElementById("startButton"); //this cluster creates images for all necessary basic components of the game
 
 const game_length = 30;
 const diamond_count = 5;
 const diamond_size = 22;
 const green_chance = 0.15;
 const red_chance = 0.05;
-const warning_time = 1000;
+const warning_time = 1000; // this estblishes basic necessary variables 
 const gem_types = {
     blue: { points: 1, life: 5000, src: "Minigame/blue-diamond.png" },
     green: { points: 3, life: 3000, src: "Minigame/green-diamond.png" },
@@ -20,18 +20,18 @@ const wall_fraction = 10 / 160;
 const base_width = 480;
 const miner_base_size = 34;
 const miner_base_speed = 3;
-const miner = { x: 0, y: 0, size: miner_base_size, speed: miner_base_speed };
+const miner = { x: 0, y: 0, size: miner_base_size, speed: miner_base_speed }; //mostly works with the background wall and miner statistics
 
 let mine_width = mine.clientWidth;
 let mine_height = mine.clientHeight;
-let wall = mine_width * wall_fraction;
+let wall = mine_width * wall_fraction; 
 let gem_size = diamond_size;
 let diamonds = [];
 let score = 0;
 let best = Number(localStorage.getItem("minerBest")) || 0;
 let timeLeft = game_length;
 let startTime = 0;
-let running = false;
+let running = false; //another few basic parameters for the game, like all-time best score 
 
 bestScore.textContent = best;
 
@@ -40,20 +40,20 @@ const keyPressed = {
     ArrowDown: false,
     ArrowLeft: false,
     ArrowRight: false
-};
+}; //establishing that none of the keys are pressed before the game starts
 
 window.addEventListener("keydown", (event) => {
     if (event.key in keyPressed) {
         event.preventDefault();
         keyPressed[event.key] = true;
     }
-});
+}); //if you press a key, it will be registered in the code
 
 window.addEventListener("keyup", (event) => {
     if (event.key in keyPressed) {
         keyPressed[event.key] = false;
     }
-});
+}); //if you stop pressing a key, it will be registered in the code
 
 document.querySelectorAll(".dpad-btn").forEach((btn) => {
     const key = btn.dataset.key;
@@ -64,7 +64,7 @@ document.querySelectorAll(".dpad-btn").forEach((btn) => {
     btn.addEventListener("pointerup", () => keyPressed[key] = false);
     btn.addEventListener("pointerleave", () => keyPressed[key] = false);
     btn.addEventListener("pointercancel", () => keyPressed[key] = false);
-});
+}); //verifies that if the dpad is not being pressed it wont register
 
 function movement() {
     if (running) {
@@ -76,11 +76,11 @@ function movement() {
         }
         if (keyPressed.ArrowRight) {
             miner.x += miner.speed;
-            minerImg.style.transform = "scaleX(1)";
+            minerImg.style.transform = "scaleX(1)"; //movement physics
         }
 
         miner.x = Math.max(wall, Math.min(miner.x, mine_width - wall - miner.size));
-        miner.y = Math.max(wall, Math.min(miner.y, mine_height - wall - miner.size));
+        miner.y = Math.max(wall, Math.min(miner.y, mine_height - wall - miner.size)); 
 
         drawMiner();
 
@@ -100,7 +100,7 @@ function movement() {
                 } else if (age > diamonds[i].life - warning_time) {
                     diamonds[i].el.classList.add("fading");
                 }
-            }
+            } //diamonds' physics, if the miner touches a diamond, it will be collected and a new one will spawn, if the diamond is not collected in time, it will disappear and a new one will spawn
         }
 
         updateTimer();
@@ -111,7 +111,7 @@ function movement() {
 function drawMiner() {
     minerImg.style.left = miner.x + "px";
     minerImg.style.top = miner.y + "px";
-}
+} //miner visuals
 
 function makeDiamond() {
     let d;
@@ -120,9 +120,9 @@ function makeDiamond() {
             x: wall + Math.random() * (mine_width - 2 * wall - gem_size),
             y: wall + Math.random() * (mine_height - 2 * wall - gem_size),
             size: gem_size,
-            kind: pickKind()
+            kind: pickKind() //random spot for diamond
         };
-    } while (border(miner, d));
+    } while (border(miner, d)); 
 
     d.born = Date.now();
     d.life = gem_types[d.kind].life;
@@ -132,20 +132,20 @@ function makeDiamond() {
     d.el.className = "diamond";
     drawDiamond(d);
     mine.appendChild(d.el);
-    return d;
+    return d; //creates the diamond and makes it appear on the screen
 }
 
 function pickKind() {
     const roll = Math.random();
     if (roll < red_chance) return "red";
     if (roll < red_chance + green_chance) return "green";
-    return "blue";
+    return "blue"; //random chances assigned based on constant value associated with color of diamond
 }
 
 function border(a, b) {
     return a.x < b.x + b.size && a.x + a.size > b.x &&
            a.y < b.y + b.size && a.y + a.size > b.y;
-}
+}//makes sure you stay within the border
 
 function updateSize() {
     const new_width = mine.clientWidth;
@@ -170,14 +170,14 @@ function updateSize() {
         d.y *= ratio;
         d.size = gem_size;
         drawDiamond(d);
-    });
+    }); //all of this makes sure that the game can be resized properly
 }
 
 function drawDiamond(d) {
     d.el.style.left = d.x + "px";
     d.el.style.top = d.y + "px";
     d.el.style.width = d.size + "px";
-    d.el.style.height = d.size + "px";
+    d.el.style.height = d.size + "px"; //make diamond visual
 }
 
 window.addEventListener("resize", updateSize);
@@ -202,7 +202,7 @@ function startGame() {
     timeText.textContent = game_length;
     running = true;
     startButton.textContent = "Restart";
-}
+} //will update size to accomadate
 
 startButton.addEventListener("click", startGame);
 
@@ -212,7 +212,7 @@ function updateTimer() {
         timeLeft = 0;
         endGame();
     }
-    timeText.textContent = Math.ceil(timeLeft);
+    timeText.textContent = Math.ceil(timeLeft); //ensure timer is accurate and ends game
 }
 
 function endGame() {
@@ -225,7 +225,7 @@ function endGame() {
     bestScore.textContent = best;
     startButton.textContent = "Play again";
     setTimeout(() => alert("Time's up! You found " + score + (score === 1 ? " diamond" : " diamonds")), 50);
-}
+} //end game mechanics
 
 updateSize();
 movement();
