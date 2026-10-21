@@ -1,17 +1,20 @@
 const mine = document.getElementById("mine");
 const minerImg = document.getElementById("minerImg");
+const mineMessage = document.getElementById("mineMessage");
+const messageTitle = document.getElementById("messageTitle");
+const messageText = document.getElementById("messageText");
 const scoreText = document.getElementById("score");
 const timeText = document.getElementById("time");
 const bestScore = document.getElementById("best");
 const startButton = document.getElementById("startButton");
 
-const mine_width = 480;
-const mine_height = 360;
 const game_length = 30;
 const diamond_count = 5;
 const diamond_size = 22;
-const miner = { x: 223, y: 163, size: 34, speed: 3 };
+const miner = { x: 0, y: 0, size: 34, speed: 3 };
 
+let mine_width = mine.clientWidth;
+let mine_height = mine.clientHeight;
 let diamonds = [];
 let score = 0;
 let best = Number(localStorage.getItem("minerBest")) || 0;
@@ -62,12 +65,11 @@ function movement() {
         miner.x = Math.max(0, Math.min(miner.x, mine_width - miner.size));
         miner.y = Math.max(0, Math.min(miner.y, mine_height - miner.size));
 
-        minerImg.style.left = miner.x + "px";
-        minerImg.style.top = miner.y + "px";
+        drawMiner();
 
         for (let i = diamonds.length - 1; i >= 0; i--) {
             if (border(miner, diamonds[i])) {
-                diamonds[i].img.remove();
+                diamonds[i].el.remove();
                 diamonds.splice(i, 1);
                 diamonds.push(makeDiamond());
                 score++;
@@ -80,18 +82,26 @@ function movement() {
     requestAnimationFrame(movement);
 }
 
+function drawMiner() {
+    minerImg.style.left = miner.x + "px";
+    minerImg.style.top = miner.y + "px";
+}
+
 function makeDiamond() {
-    const d = {
-        x: Math.random() * (mine_width - diamond_size),
-        y: Math.random() * (mine_height - diamond_size),
-        size: diamond_size,
-        img: document.createElement("img")
-    };
-    d.img.src = "your-diamond.png";
-    d.img.className = "diamond";
-    d.img.style.left = d.x + "px";
-    d.img.style.top = d.y + "px";
-    mine.appendChild(d.img);
+    let d;
+    do {
+        d = {
+            x: Math.random() * (mine_width - diamond_size),
+            y: Math.random() * (mine_height - diamond_size),
+            size: diamond_size
+        };
+    } while (border(miner, d));
+
+    d.el = document.createElement("div");
+    d.el.className = "diamond";
+    d.el.style.left = d.x + "px";
+    d.el.style.top = d.y + "px";
+    mine.appendChild(d.el);
     return d;
 }
 
@@ -101,15 +111,22 @@ function border(a, b) {
 }
 
 function startGame() {
+    mine_width = mine.clientWidth;
+    mine_height = mine.clientHeight;
+
     score = 0;
     scoreText.textContent = 0;
-    miner.x = 223;
-    miner.y = 163;
-    minerImg.style.left = miner.x + "px";
-    minerImg.style.top = miner.y + "px";
-    diamonds.forEach((d) => d.img.remove());
+
+    miner.x = (mine_width - miner.size) / 2;
+    miner.y = (mine_height - miner.size) / 2;
+    drawMiner();
+    minerImg.classList.remove("hidden");
+    mineMessage.classList.add("hidden");
+
+    diamonds.forEach((d) => d.el.remove());
     diamonds = [];
     for (let i = 0; i < diamond_count; i++) diamonds.push(makeDiamond());
+
     startTime = Date.now();
     timeText.textContent = game_length;
     running = true;
@@ -136,9 +153,10 @@ function endGame() {
     }
     bestScore.textContent = best;
     startButton.textContent = "Play again";
-    setTimeout(() => alert("Time's up! You got " + score + " diamonds"), 50);
+
+    messageTitle.textContent = "Time's up!";
+    messageText.textContent = "You found " + score + (score === 1 ? " diamond" : " diamonds");
+    mineMessage.classList.remove("hidden");
 }
 
-minerImg.style.left = miner.x + "px";
-minerImg.style.top = miner.y + "px";
 movement();
