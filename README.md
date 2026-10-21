@@ -61,6 +61,14 @@ Lucas Zhao
 5. Made product.html to show all of the products
 6. Created gunter.html so Gunter can view the orders he needs to complete
 
+Aman Henok
+1. Created all of frontend
+2. Created Homepage
+3. Came up with the product lines
+4. Created and designed all product images
+5. Created navigation bars for all pages
+6. Made the pages for each line
+7. Created the page format for each product
 
 
 
@@ -70,7 +78,9 @@ found the right outer curve border radius with claude llm
 Found the product images with ai; however, they are real swords.
 Used AI help for getting the midevil font
 Helped me with the padding and gap of mainpart
-Helped me with merge
+Helped me with merge conflicts
+Helped create our minigame background and miner
+
 
 
 

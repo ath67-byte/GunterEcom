@@ -777,6 +777,9 @@ header{
     transform: scale(0.95);
     filter: brightness(85%); 
 }
+.minigame-start:focus{
+    outline: none;
+}
 .dpad-btn{
     margin:2.5px 0px;
     font-size: clamp(20px,2vw,30px);
@@ -789,7 +792,9 @@ header{
     border: 1px solid lightgrey;
     transition: transform 0.1s ease;
     transition: filter 0.1s ease;
-
+}
+.dpad-btn:focus{
+    outline: none;
 }
 .dpad-btn:active{
     transform: scale(0.95);
