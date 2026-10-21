@@ -118,13 +118,13 @@ async function placeOrder(event) { // place order button
   event.preventDefault();   // stop the form from reloading the page
 
   const button = document.getElementById("place-order");
-  const name = document.getElementById("name").value.trim();
+  const name = document.getElementById("name").value.trim(); //gets notes and name
   const notes = document.getElementById("notes").value.trim();
 
-  button.disabled = true;
+  button.disabled = true; //so the user can't click the button again
   button.textContent = "Placing order...";
 
-  await getUser();
+  await getUser(); //finds current user
 
   const rows = [];
   for (const item of getCart()) {
