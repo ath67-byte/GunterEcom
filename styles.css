@@ -812,6 +812,10 @@ header{
     border-radius: 12px; 
     overflow: hidden; 
     touch-action: none; 
+    background-image: url("miner_bg.svg");
+    background-size: cover;
+    background-position: center;
+    image-rendering: pixelated;
 }
 #minerImg{ 
     position: absolute; 
