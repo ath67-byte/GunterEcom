@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
+    <body class = "minigameBackground">
         <header>
             <nav class="navbar">
                 <ul>
@@ -52,10 +52,14 @@
             <button id="startButton" class="minigame-start">Start</button>
 
             <div class="dpad">
-                <button class="dpad-btn dpad-up" data-key="ArrowUp">▲</button>
-                <button class="dpad-btn dpad-left" data-key="ArrowLeft">◀</button>
-                <button class="dpad-btn dpad-right" data-key="ArrowRight">▶</button>
-                <button class="dpad-btn dpad-down" data-key="ArrowDown">▼</button>
+                <div class="topDpad">
+                    <button class="dpad-btn dpad-up" data-key="ArrowUp">▲</button>
+                </div>
+                <div class="bottomDpad">
+                    <button class="dpad-btn dpad-left" data-key="ArrowLeft">◀</button>
+                    <button class="dpad-btn dpad-down" data-key="ArrowDown">▼</button>
+                    <button class="dpad-btn dpad-right" data-key="ArrowRight">▶</button>
+                </div>
             </div>
 
             <p class="minigame-help">Use the arrow keys, or the buttons on a phone.</p>
