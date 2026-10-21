@@ -1,8 +1,5 @@
 const mine = document.getElementById("mine");
 const minerImg = document.getElementById("minerImg");
-const mineMessage = document.getElementById("mineMessage");
-const messageTitle = document.getElementById("messageTitle");
-const messageText = document.getElementById("messageText");
 const scoreText = document.getElementById("score");
 const timeText = document.getElementById("time");
 const bestScore = document.getElementById("best");
@@ -11,10 +8,17 @@ const startButton = document.getElementById("startButton");
 const game_length = 30;
 const diamond_count = 5;
 const diamond_size = 22;
+const green_chance = 0.15;
+const green_points = 3;
+const diamond_life = 5000;
+const green_life = 3000;
+const warning_time = 1000;
+const wall_fraction = 10 / 160;
 const miner = { x: 0, y: 0, size: 34, speed: 3 };
 
 let mine_width = mine.clientWidth;
 let mine_height = mine.clientHeight;
+let wall = mine_width * wall_fraction;
 let diamonds = [];
 let score = 0;
 let best = Number(localStorage.getItem("minerBest")) || 0;
@@ -59,21 +63,36 @@ function movement() {
     if (running) {
         if (keyPressed.ArrowUp) miner.y -= miner.speed;
         if (keyPressed.ArrowDown) miner.y += miner.speed;
-        if (keyPressed.ArrowLeft) miner.x -= miner.speed;
-        if (keyPressed.ArrowRight) miner.x += miner.speed;
+        if (keyPressed.ArrowLeft) {
+            miner.x -= miner.speed;
+            minerImg.style.transform = "scaleX(-1)";
+        }
+        if (keyPressed.ArrowRight) {
+            miner.x += miner.speed;
+            minerImg.style.transform = "scaleX(1)";
+        }
 
-        miner.x = Math.max(0, Math.min(miner.x, mine_width - miner.size));
-        miner.y = Math.max(0, Math.min(miner.y, mine_height - miner.size));
+        miner.x = Math.max(wall, Math.min(miner.x, mine_width - wall - miner.size));
+        miner.y = Math.max(wall, Math.min(miner.y, mine_height - wall - miner.size));
 
         drawMiner();
 
         for (let i = diamonds.length - 1; i >= 0; i--) {
             if (border(miner, diamonds[i])) {
+                score += diamonds[i].green ? green_points : 1;
                 diamonds[i].el.remove();
                 diamonds.splice(i, 1);
                 diamonds.push(makeDiamond());
-                score++;
                 scoreText.textContent = score;
+            } else {
+                const age = Date.now() - diamonds[i].born;
+                if (age > diamonds[i].life) {
+                    diamonds[i].el.remove();
+                    diamonds.splice(i, 1);
+                    diamonds.push(makeDiamond());
+                } else if (age > diamonds[i].life - warning_time) {
+                    diamonds[i].el.classList.add("fading");
+                }
             }
         }
 
@@ -91,13 +110,18 @@ function makeDiamond() {
     let d;
     do {
         d = {
-            x: Math.random() * (mine_width - diamond_size),
-            y: Math.random() * (mine_height - diamond_size),
-            size: diamond_size
+            x: wall + Math.random() * (mine_width - 2 * wall - diamond_size),
+            y: wall + Math.random() * (mine_height - 2 * wall - diamond_size),
+            size: diamond_size,
+            green: Math.random() < green_chance
         };
     } while (border(miner, d));
 
-    d.el = document.createElement("div");
+    d.born = Date.now();
+    d.life = d.green ? green_life : diamond_life;
+
+    d.el = document.createElement("img");
+    d.el.src = d.green ? "Minigame/green-diamond.png" : "Minigame/blue-diamond.png";
     d.el.className = "diamond";
     d.el.style.left = d.x + "px";
     d.el.style.top = d.y + "px";
@@ -113,6 +137,7 @@ function border(a, b) {
 function startGame() {
     mine_width = mine.clientWidth;
     mine_height = mine.clientHeight;
+    wall = mine_width * wall_fraction;
 
     score = 0;
     scoreText.textContent = 0;
@@ -120,8 +145,8 @@ function startGame() {
     miner.x = (mine_width - miner.size) / 2;
     miner.y = (mine_height - miner.size) / 2;
     drawMiner();
+    minerImg.style.transform = "scaleX(1)";
     minerImg.classList.remove("hidden");
-    mineMessage.classList.add("hidden");
 
     diamonds.forEach((d) => d.el.remove());
     diamonds = [];
@@ -153,10 +178,7 @@ function endGame() {
     }
     bestScore.textContent = best;
     startButton.textContent = "Play again";
-
-    messageTitle.textContent = "Time's up!";
-    messageText.textContent = "You found " + score + (score === 1 ? " diamond" : " diamonds");
-    mineMessage.classList.remove("hidden");
+    setTimeout(() => alert("Time's up! You found " + score + (score === 1 ? " diamond" : " diamonds")), 50);
 }
 
 movement();
