@@ -139,8 +139,6 @@ header{
     white-space: nowrap;
     width: 100%;
     font-size: 12px;
-    
-
 }
 .sidenavbuttons:hover{
     filter: brightness(85%);
