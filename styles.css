@@ -746,6 +746,10 @@ header{
 
 
 /*Minigame styling*/
+.topTitleArea{
+    margin: 30px;
+    text-align: center;
+}
 .dpad{
     margin: 20px
 }
@@ -753,15 +757,14 @@ header{
     background-color: rgb(240, 244, 248) ;
 }
 .minigame-start{
+    white-space: nowrap;
     margin:10px 0px;
     font-size: clamp(20px,2vw,30px);
-    padding: 1px 1px;
+    padding: 2px 10px;
     border: none;
     border-radius: 5px;
     color: black;
     background-color:rgb(255, 255, 255);
-    width: 70px;
-    height:30px;
     border: 1px solid lightgrey;
     display: flex;
     justify-content: center;
@@ -773,6 +776,9 @@ header{
 .minigame-start:active{
     transform: scale(0.95);
     filter: brightness(85%); 
+}
+.minigame-start:focus{
+    outline: none;
 }
 .dpad-btn{
     margin:2.5px 0px;
@@ -786,7 +792,9 @@ header{
     border: 1px solid lightgrey;
     transition: transform 0.1s ease;
     transition: filter 0.1s ease;
-
+}
+.dpad-btn:focus{
+    outline: none;
 }
 .dpad-btn:active{
     transform: scale(0.95);
@@ -798,4 +806,47 @@ header{
     display: flex;
     justify-content: center;
     gap: 5px;
+}
+#mine{ 
+    position: relative; 
+    width: 100%; 
+    max-width: 480px; 
+    aspect-ratio: 4 / 3; 
+    margin: 0 auto; 
+    background-color: #2b1d14; 
+    border-radius: 12px; 
+    overflow: hidden; 
+    touch-action: none; 
+    background-image: url("miner_bg.svg");
+    background-size: cover;
+    background-position: center;
+    image-rendering: pixelated;
+}
+#minerImg{ 
+    position: absolute; 
+    width: 34px; height: 
+    34px; 
+    z-index: 2; 
+}
+.minigame{ 
+    padding: 0 16px; 
+}
+.hidden{ 
+    display: none !important; 
+}
+.diamond{ 
+    position: absolute; 
+    width: 22px; 
+    height: 22px; 
+}
+.diamond::before{ 
+    content: ""; 
+    position: absolute; 
+    inset: 3px; background: 
+    linear-gradient(135deg, #d6f6ff, #6fd8ff 60%, #2fa8d8); 
+    transform: rotate(45deg); 
+    box-shadow: 0 0 8px rgba(120, 220, 255, 0.8); }
+.ruby::before{
+    background: linear-gradient(135deg, #ffd6dc, #e0115f 60%, #9b0d3a);
+    box-shadow: 0 0 10px rgba(255, 60, 100, 0.9);
 }

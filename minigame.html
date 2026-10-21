@@ -38,17 +38,19 @@
         </nav>
         <label for="menu-toggle" class="overlay"></label>
         <main class="minigame">
-            <h1>Gunter's Mine</h1>
-            <p class="minigame-intro">Your order is on the anvil. Grab as many diamonds as you can in 30 seconds.</p>
+            <div class="topTitleArea">
+                <h1>Gunter's Mine</h1>
+                <p class="minigame-intro">Your order is on the anvil. Grab as many diamonds as you can in 30 seconds.</p>
 
-            <div class="minigame-stats">
-                <span>Score: <strong id="score">0</strong></span>
-                <span>Time: <strong id="time">30</strong></span>
-                <span>Best: <strong id="best">0</strong></span>
+                <div class="minigame-stats">
+                    <span>Score: <strong id="score">0</strong></span>
+                    <span>Time: <strong id="time">30</strong></span>
+                    <span>Best: <strong id="best">0</strong></span>
+                </div>
             </div>
 
             <div id="mine">
-                <img id="minerImg" src="Minigame/miner_clean.png">
+                <img id="minerImg" src="Minigame/miner_clean.png" class="hidden">
             </div>
 
             <button id="startButton" class="minigame-start">Start</button>
